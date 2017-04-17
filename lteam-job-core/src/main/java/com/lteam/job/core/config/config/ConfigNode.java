@@ -10,4 +10,5 @@ import com.lteam.job.common.config.Node;
  */
 public class ConfigNode extends Node{
 
+	
 }

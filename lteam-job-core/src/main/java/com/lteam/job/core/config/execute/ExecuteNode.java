@@ -8,4 +8,5 @@ import com.lteam.job.common.config.Node;
  */
 public class ExecuteNode extends Node{
 
+	
 }
