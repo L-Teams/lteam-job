@@ -1,5 +1,6 @@
 package com.lteam.job.core.config.config;
 import com.lteam.job.common.config.Node;
+import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.job.JobConfig;
 
@@ -19,6 +20,7 @@ public class ConfigNode extends Node{
 	
 	private ConfigNode addJobInfo(JobConfig jobConfig){
 		nodeContent = jobConfig.toString();//to json
+		nodePath = NodePath.getConfigPath(jobConfig);
 		return this;
 	}
 	
@@ -45,7 +47,7 @@ public class ConfigNode extends Node{
 	 * 功能:暂停job,如果当前job在执行,需保证当前job执行完在停止
 	 * 逻辑:
 	 */
-	private void stop(){
+	private void stopJob(){
 		
 	}
 	
@@ -53,7 +55,7 @@ public class ConfigNode extends Node{
 	 * 功能:启动job
 	 * 逻辑:
 	 */
-	private void run(){
+	private void runJob(){
 		
 	}
 	
@@ -61,7 +63,15 @@ public class ConfigNode extends Node{
 	 * 功能:销毁job
 	 * 逻辑:
 	 */
-	private void destory(){
+	private void destoryJob(){
+		
+	}
+	
+	/**
+	 * 功能:获取job信息
+	 * 逻辑:
+	 */
+	private void getJobInfo(){
 		
 	}
 }
