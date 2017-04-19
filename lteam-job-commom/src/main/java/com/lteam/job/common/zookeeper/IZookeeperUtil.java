@@ -7,4 +7,13 @@ package com.lteam.job.common.zookeeper;
  */
 public interface IZookeeperUtil {
 
+	/**
+	 * 初始化客户端连接
+	 */
+	public void inital();
+	
+	public void close();
+	
+	public void addNode();
+	
 }

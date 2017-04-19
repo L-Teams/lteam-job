@@ -8,19 +8,19 @@ package com.lteam.job.common.config;
 public class Node {
 
 	//节点类型
-	private String nodeType;
+	protected NodeType nodeType;
 	
 	//节点名称
-	private String nodeName;
+	protected String nodeName;
 	
 	//节点内容
-	private String nodeContent;
+	protected String nodeContent;
 
-	public String getNodeType() {
+	public NodeType getNodeType() {
 		return nodeType;
 	}
 
-	public void setNodeType(String nodeType) {
+	public void setNodeType(NodeType nodeType) {
 		this.nodeType = nodeType;
 	}
 

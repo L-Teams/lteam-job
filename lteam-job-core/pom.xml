@@ -15,7 +15,6 @@
   <url>http://maven.apache.org</url>
   
   <dependencies>  
-    <!-- 引入公共common -->
     <dependency>  
        <groupId>com.lteam</groupId>  
        <artifactId>lteam-job-commom</artifactId>  

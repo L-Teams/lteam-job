@@ -1,4 +1,7 @@
 package com.lteam.job.common.zookeeper;
+
+import org.I0Itec.zkclient.ZkClient;
+
 /**
  * @Description:基于ZkClient实现zookeeper操作
  * @author guicheng.huang
@@ -7,4 +10,11 @@ package com.lteam.job.common.zookeeper;
  */
 public abstract class ZkClientUtil implements IZookeeperUtil {
 
+	/**
+	 * 获取ZkClient 对象
+	 * @return
+	 */
+	public abstract ZkClient getZookeeperConnect();
+	
+	
 }
