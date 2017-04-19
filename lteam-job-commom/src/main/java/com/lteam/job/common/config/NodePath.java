@@ -52,4 +52,8 @@ public class NodePath {
 	public static String getSuccessServerPath(ServerConfig config){
 		return String.format(HOSTFAILSERVERNODEPATH,config.getSystemName(), config.getJobName(), config.getHostName());
 	}
+	
+	public static String getMasterServerPath(Config config){
+		return String.format(MASTERNODEPATH, config.getSystemName(), config.getJobName());
+	}
 }
