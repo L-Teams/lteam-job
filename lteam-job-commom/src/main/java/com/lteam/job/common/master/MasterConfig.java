@@ -13,7 +13,7 @@ public class MasterConfig extends ServerConfig{
 
 	private RoutingStrategy rouingType = RoutingStrategy.FAILOVER;
 	
-    private String logInterFace; //日志服务地址
+    private String logInterFace; //日志服务地址,供主节点保存日志使用
     
 	public String getLogInterFace() {
 		return logInterFace;

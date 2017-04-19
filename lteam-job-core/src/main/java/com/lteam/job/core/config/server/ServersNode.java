@@ -4,6 +4,7 @@ import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.server.ServerConfig;
+import com.lteam.job.common.server.ServerInfoType;
 
 /**
  * @Description:服务节点
@@ -75,7 +76,7 @@ public class ServersNode extends Node{
 	 * 功能:获取服务器信息
 	 * 逻辑:
 	 */
-	private void getServerInfo(){
+	private void getServerInfo(ServerInfoType infoType){
 		
 	}
 }
