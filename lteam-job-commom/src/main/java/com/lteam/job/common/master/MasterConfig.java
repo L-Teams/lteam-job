@@ -1,0 +1,13 @@
+package com.lteam.job.common.master;
+
+import com.lteam.job.common.server.ServerConfig;
+
+/**
+ * @Description:主节点配置
+ * @author guicheng.huang
+ * @date: 2017年4月19日 上午10:31:16
+ * @version V0.0.1
+ */
+public class MasterConfig extends ServerConfig{
+
+}
