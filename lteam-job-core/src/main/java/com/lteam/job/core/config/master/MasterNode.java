@@ -51,10 +51,9 @@ public class MasterNode extends Node{
 	}
 	
 	/**
-	 * 功能:获取主服务器信息
+	 * 功能:获取主节点信息
 	 */
 	private void getMarsterServerInfo(){
 		
 	}
-	
 }
