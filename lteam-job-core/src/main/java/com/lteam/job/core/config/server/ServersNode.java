@@ -31,7 +31,7 @@ public class ServersNode extends Node{
 		nodeName = ServersNode.class.getSimpleName().toLowerCase();
 	}
 	
-	public ServersNode addServerInfo(ServerConfig config){
+	private ServersNode addServerInfo(ServerConfig config){
 		nodePath = NodePath.getServersPath(config);
 		hostServerPath = NodePath.getServersPath(config)+"/"+config.getHostName();
 		hostServerFailCoutPath = NodePath.getFailServerPath(config);
@@ -77,6 +77,14 @@ public class ServersNode extends Node{
 	 * 逻辑:
 	 */
 	private void getServerInfo(ServerInfoType infoType){
+		
+	}
+	
+	/**
+	 * 功能:获取主服务器信息
+	 * 逻辑:
+	 */
+	private void getMasterInfo(){
 		
 	}
 }

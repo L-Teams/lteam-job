@@ -1,7 +1,9 @@
 package com.lteam.job.core.config.master;
 
 import com.lteam.job.common.config.Node;
+import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
+import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.core.config.server.ServersNode;
 
 /**
@@ -12,8 +14,47 @@ import com.lteam.job.core.config.server.ServersNode;
  */
 public class MasterNode extends Node{
 
+	private String masterServerPath = "";
+	
+	private String masterServerContent = "";
+	
+	private String routingStrategyPath = "";
+	
+	private String routingStrategyContent = "";
+	
+	private String logServicePath = "";
+	
+	private String logServiceContent = "";
+	
 	public MasterNode(){
 		nodeType = NodeType.MASTERNODE;
 		nodeName = MasterNode.class.getSimpleName().toLowerCase();
 	}
+	
+	private MasterNode addMasterInfo(MasterConfig config){
+		nodePath = NodePath.getMasterNodePath(config);
+		masterServerPath = NodePath.getMasterServerPath(config);
+		masterServerContent = config.getMasterHostName();
+		routingStrategyPath = NodePath.getRoutingStrategyPath(config);
+	    routingStrategyContent = config.getRouingType().toString(); //TODO->JSON
+	    logServicePath = NodePath.getLogServicePath(config);
+	    logServiceContent = config.getLogInterFace();//TODO->JSON
+		return this;
+	}
+	
+	/**
+	 * 功能:存储主节点信息
+	 * 逻辑
+	 */
+	private void storeMasterServerInfo(){
+		
+	}
+	
+	/**
+	 * 功能:获取主服务器信息
+	 */
+	private void getMarsterServerInfo(){
+		
+	}
+	
 }
