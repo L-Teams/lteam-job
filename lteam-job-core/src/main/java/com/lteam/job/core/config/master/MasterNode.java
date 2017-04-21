@@ -1,6 +1,8 @@
 package com.lteam.job.core.config.master;
 
 import com.lteam.job.common.config.Node;
+import com.lteam.job.common.config.NodeType;
+import com.lteam.job.core.config.server.ServersNode;
 
 /**
  * @Description:主节点
@@ -10,4 +12,8 @@ import com.lteam.job.common.config.Node;
  */
 public class MasterNode extends Node{
 
+	public MasterNode(){
+		nodeType = NodeType.MASTERNODE;
+		nodeName = MasterNode.class.getSimpleName().toLowerCase();
+	}
 }

@@ -11,10 +11,22 @@ import com.lteam.job.common.server.ServerConfig;
  */
 public class MasterConfig extends ServerConfig{
 
+	//路由策略默认失败转移
 	private RoutingStrategy rouingType = RoutingStrategy.FAILOVER;
 	
+	//日志服务地址
     private String logInterFace; //日志服务地址,供主节点保存日志使用
     
+    private String masterHostName;
+    
+	public String getMasterHostName() {
+		return masterHostName;
+	}
+
+	public void setMasterHostName(String masterHostName) {
+		this.masterHostName = masterHostName;
+	}
+
 	public String getLogInterFace() {
 		return logInterFace;
 	}
