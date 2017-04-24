@@ -15,23 +15,23 @@ import com.lteam.job.common.server.ServerInfoType;
 public class ServersNode extends Node{
 
 	//本机服务节点路径
-	private String hostServerPath = "";
+	private String hostServerPath;
 	
 	//本机服务数据=服务器状态
-	private String hostServerDate = "";
+	private String hostServerDate;
 	
 	//本机服务执行失败任务次数节点路径
-	private String hostServerFailCoutPath = "";
+	private String hostServerFailCoutPath;
 	
 	//本机服务执行成功任务次数节点路径
-	private String hostServerSuccessCoutPath = "";
+	private String hostServerSuccessCoutPath;
 	
 	public ServersNode(){
 		nodeType = NodeType.SERVERNODE;
 		nodeName = ServersNode.class.getSimpleName().toLowerCase();
 	}
 	
-	private ServersNode addServerInfo(ServerConfig config){
+	public ServersNode addServerInfo(ServerConfig config){
 		nodePath = NodePath.getServersPath(config);
 		hostServerPath = NodePath.getServersPath(config)+"/"+config.getHostName();
 		hostServerFailCoutPath = NodePath.getFailServerPath(config);
@@ -44,7 +44,7 @@ public class ServersNode extends Node{
 	 * 功能:存储服务器节点信息
 	 * 逻辑:
 	 */
-	private void storeServerInfo(){
+	public void storeServerInfo(){
 		
 	}
 	

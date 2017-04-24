@@ -21,6 +21,7 @@ public class ExecuteNode extends Node{
 	
 	public ExecuteNode addExecuteInfo(ExecuteConfig config){
 		executejobSlicePath = NodePath.getExecuteSlienceJobServicePath(config);
+		nodePath= NodePath.getExecuteServicePath(config);
 		return this;
 	}
 }

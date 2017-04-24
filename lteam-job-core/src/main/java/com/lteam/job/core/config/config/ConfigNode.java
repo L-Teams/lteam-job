@@ -18,7 +18,7 @@ public class ConfigNode extends Node{
 		nodeName = ConfigNode.class.getSimpleName().toLowerCase();
 	}
 	
-	private ConfigNode addJobInfo(JobConfig jobConfig){
+	public ConfigNode addJobInfo(JobConfig jobConfig){
 		nodeContent = jobConfig.toString();//to json
 		nodePath = NodePath.getConfigPath(jobConfig);
 		return this;
@@ -30,7 +30,7 @@ public class ConfigNode extends Node{
 	 *     不存在则新增
 	 *     存在则更新confignode节点数据,更新的过程增加version,并获取version增加到版本节点,供还原任务版本使用
 	 */
-	private void storeJobInfo(){
+	public void storeJobInfo(){
 		
 	}
 	

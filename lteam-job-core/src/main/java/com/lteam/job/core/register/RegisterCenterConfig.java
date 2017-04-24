@@ -9,7 +9,7 @@ public class RegisterCenterConfig {
 
 	private String serversList;//注册中心服务地址
 	
-	private String nameSpace;
+	private String nameSpace = "/lteam-job"; //默认命名空间为/lteam-job
 
     private int baseSleepTimeMilliseconds = 1000;
     
@@ -17,6 +17,36 @@ public class RegisterCenterConfig {
     
     private int maxRetries = 3;  
     
+    private int sessionTimeoutMilliseconds;
+    
+    private int connectionTimeoutMilliseconds;
+    
+    private String digest;
+    
+	public int getSessionTimeoutMilliseconds() {
+		return sessionTimeoutMilliseconds;
+	}
+
+	public void setSessionTimeoutMilliseconds(int sessionTimeoutMilliseconds) {
+		this.sessionTimeoutMilliseconds = sessionTimeoutMilliseconds;
+	}
+
+	public int getConnectionTimeoutMilliseconds() {
+		return connectionTimeoutMilliseconds;
+	}
+
+	public void setConnectionTimeoutMilliseconds(int connectionTimeoutMilliseconds) {
+		this.connectionTimeoutMilliseconds = connectionTimeoutMilliseconds;
+	}
+
+	public String getDigest() {
+		return digest;
+	}
+
+	public void setDigest(String digest) {
+		this.digest = digest;
+	}
+
 	public int getBaseSleepTimeMilliseconds() {
 		return baseSleepTimeMilliseconds;
 	}

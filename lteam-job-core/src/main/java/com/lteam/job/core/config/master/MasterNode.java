@@ -31,7 +31,7 @@ public class MasterNode extends Node{
 		nodeName = MasterNode.class.getSimpleName().toLowerCase();
 	}
 	
-	private MasterNode addMasterInfo(MasterConfig config){
+	public MasterNode addMasterInfo(MasterConfig config){
 		nodePath = NodePath.getMasterNodePath(config);
 		masterServerPath = NodePath.getMasterServerPath(config);
 		masterServerContent = config.getMasterHostName();
