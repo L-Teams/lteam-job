@@ -14,7 +14,7 @@
   <name>lteam-job-core</name>
   <url>http://maven.apache.org</url>
   
-  <dependencies>  
+  <dependencies> 
     <dependency>  
        <groupId>com.lteam</groupId>  
        <artifactId>lteam-job-commom</artifactId>  

@@ -46,7 +46,7 @@ public class MasterNode extends Node{
 	 * 功能:存储主节点信息
 	 * 逻辑
 	 */
-	private void storeMasterServerInfo(){
+	public void storeMasterServerInfo(){
 		
 	}
 	

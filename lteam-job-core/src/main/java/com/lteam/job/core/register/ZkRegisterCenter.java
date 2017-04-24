@@ -4,9 +4,14 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 
+import com.lteam.job.common.config.Config;
+import com.lteam.job.common.execute.ExecuteConfig;
 import com.lteam.job.common.job.JobConfig;
+import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.common.server.ServerConfig;
 import com.lteam.job.core.config.config.ConfigNode;
+import com.lteam.job.core.config.execute.ExecuteNode;
+import com.lteam.job.core.config.master.MasterNode;
 import com.lteam.job.core.config.server.ServersNode;
 
 /**
@@ -88,24 +93,34 @@ public class ZkRegisterCenter extends RegisterCenter{
 
     /**
      * 功能:注册服务器信息
+     * 逻辑:
      */
 	public void registerServerConfigInfo() {
-		 new ServersNode().addServerInfo(new ServerConfig()).storeServerInfo();
+		 new ServersNode().addServerInfo(new ServerConfig(jobConfig)).storeServerInfo();
 	}
 
-	@Override
+	/**
+	 * 功能:注册任务分片信息
+	 * 逻辑:
+	 */
 	public void registerSilenceJobConfigInfo() {
 		
 	}
 
-	@Override
+	/**
+	 * 功能:注册主节点信息
+	 * 逻辑:
+	 */
 	public void registerMasterConfigInfo() {
-		
+		new MasterNode().addMasterInfo(new MasterConfig(jobConfig)).storeMasterServerInfo();
 	}
 
-	@Override
+	/**
+	 * 功能:注册执行器信息
+	 * 逻辑:
+	 */
 	public void registerExecuterConfigInfo() {
-	
+		//new ExecuteNode().addExecuteInfo(new ExecuteConfig(jobConfig)).
 	}
 
 }

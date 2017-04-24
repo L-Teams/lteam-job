@@ -3,7 +3,7 @@ package com.lteam.job.common.job;
 import com.lteam.job.common.config.Config;
 
 /**
- * @Description:
+ * @Description:job配置信息
  * @author guicheng.huang
  * @date: 2017年4月18日 下午4:59:49
  * @version V0.0.1

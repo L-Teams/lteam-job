@@ -13,6 +13,13 @@ public class Config {
 	
 	protected String jobName;
 	
+	public Config(){}
+	
+	public Config(Config config){
+		this.systemName = config.getSystemName();
+		this.jobName = config.getJobName();
+	}
+	
 	public String getRootPath() {
 		return rootPath;
 	}

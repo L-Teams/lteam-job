@@ -16,9 +16,13 @@ public class ServerConfig extends Config{
 	
 	private ServerStatus serverStatus = ServerStatus.START; //服务器状态,默认直接可运行job,可以设置READY,等所有服务器上线统一运行job
 
-	private int failCount; //任务失败的数量,用于统计该服务器执行任务的失败率,判断服务器是否可靠;
+	private int failCount = 0; //任务失败的数量,用于统计该服务器执行任务的失败率,判断服务器是否可靠;
 	
-	private int successCount;//任务成功的数量;
+	private int successCount = 0;//任务成功的数量;
+	
+	public ServerConfig(Config config){
+		super(config);
+	}
 	
 	public String getHostName(){
 		String hostName = hostIp+":"+post;//问题?可能为处理post  ->TODO
