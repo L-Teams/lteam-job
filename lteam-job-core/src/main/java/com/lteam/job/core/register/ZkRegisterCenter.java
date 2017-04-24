@@ -3,14 +3,10 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-
-import com.lteam.job.common.config.Config;
-import com.lteam.job.common.execute.ExecuteConfig;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.common.server.ServerConfig;
 import com.lteam.job.core.config.config.ConfigNode;
-import com.lteam.job.core.config.execute.ExecuteNode;
 import com.lteam.job.core.config.master.MasterNode;
 import com.lteam.job.core.config.server.ServersNode;
 
@@ -28,7 +24,7 @@ public class ZkRegisterCenter extends RegisterCenter{
 	//任务配置信息
 	private JobConfig jobConfig;
 	
-	private CuratorFramework cilent;
+	private static CuratorFramework cilent;
 	
 	
 	public JobConfig getJobConfig() {
@@ -39,13 +35,10 @@ public class ZkRegisterCenter extends RegisterCenter{
 		this.jobConfig = jobConfig;
 	}
 
-	public CuratorFramework getCilent() {
+	public static CuratorFramework getCilent() {
 		return cilent;
 	}
 
-	public void setCilent(CuratorFramework cilent) {
-		this.cilent = cilent;
-	}
 	
 	public RegisterCenterConfig getCenterConfig() {
 		return centerConfig;

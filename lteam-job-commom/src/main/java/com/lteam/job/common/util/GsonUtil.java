@@ -7,4 +7,5 @@ package com.lteam.job.common.util;
  */
 public class GsonUtil {
 
+	
 }

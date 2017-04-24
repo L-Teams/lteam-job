@@ -1,8 +1,11 @@
 package com.lteam.job.core.config.config;
+import org.apache.curator.framework.CuratorFramework;
+
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.job.JobConfig;
+import com.lteam.job.core.register.ZkRegisterCenter;
 
 /**
  * @Description:JOB 配置信息节点
@@ -31,7 +34,10 @@ public class ConfigNode extends Node{
 	 *     存在则更新confignode节点数据,更新的过程增加version,并获取version增加到版本节点,供还原任务版本使用
 	 */
 	public void storeJobInfo(){
-		
+		CuratorFramework cilent = ZkRegisterCenter.getCilent();
+		if(cilent.checkExists().forPath(nodePath)){
+			
+		}
 	}
 	
 	/**
