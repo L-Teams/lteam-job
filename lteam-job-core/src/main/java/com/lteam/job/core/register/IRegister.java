@@ -7,5 +7,17 @@ package com.lteam.job.core.register;
  */
 public interface IRegister {
 
+	/**
+	 * 功能:初始化注册中心
+	 * 逻辑:
+	 */
+	public void inital();
+	
+	/**
+	 * 功能:关闭注册中心
+	 * 逻辑:
+	 */
+	public void close();
+	
 	
 }
