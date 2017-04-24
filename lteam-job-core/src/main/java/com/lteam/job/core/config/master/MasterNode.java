@@ -14,17 +14,17 @@ import com.lteam.job.core.config.server.ServersNode;
  */
 public class MasterNode extends Node{
 
-	private String masterServerPath = "";
+	private String masterServerPath;
 	
-	private String masterServerContent = "";
+	private String masterServerContent;
 	
-	private String routingStrategyPath = "";
+	private String routingStrategyPath;
 	
-	private String routingStrategyContent = "";
+	private String routingStrategyContent;
 	
-	private String logServicePath = "";
+	private String logServicePath;
 	
-	private String logServiceContent = "";
+	private String logServiceContent;
 	
 	public MasterNode(){
 		nodeType = NodeType.MASTERNODE;

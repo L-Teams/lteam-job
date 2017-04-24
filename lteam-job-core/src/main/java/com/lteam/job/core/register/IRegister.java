@@ -7,4 +7,5 @@ package com.lteam.job.core.register;
  */
 public interface IRegister {
 
+	
 }

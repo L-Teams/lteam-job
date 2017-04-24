@@ -1,5 +1,6 @@
 package com.lteam.job.common.config;
 
+import com.lteam.job.common.execute.ExecuteConfig;
 import com.lteam.job.common.server.ServerConfig;
 
 /**
@@ -32,6 +33,8 @@ public class NodePath {
 	
 	static final String EXECUTENODEPATH = ROOT+"/%s/%s/"+EXECUTENODENAME;
 	
+	static final String EXECUTEJOBSELEICEPATH = EXECUTENODEPATH+"/%s";
+	
 	static final String MASTERNODENAME = "masternode";
 	
 	static final String MASTERNODEPATH = ROOT+"/%s/%s/"+MASTERNODENAME;
@@ -47,6 +50,7 @@ public class NodePath {
 	static final String LOGSERVICENODENAME = "logservice";
 	
 	static final String LOGSERVICEPATH = ROOT+"/%s/%s/"+MASTERNODENAME+"/"+LOGSERVICENODENAME;
+	
 	
 	public static String getConfigPath(Config config){
 		return String.format(CONFIGNODEPATH, config.getSystemName(), config.getJobName());
@@ -78,5 +82,13 @@ public class NodePath {
 	
 	public static String getLogServicePath(Config config){
 		return String.format(LOGSERVICEPATH, config.getSystemName(), config.getJobName());
+	}
+	
+	public static String getExecuteServicePath(Config config){
+		return String.format(EXECUTENODEPATH, config.getSystemName(), config.getJobName());
+	}
+	
+	public static String getExecuteSlienceJobServicePath(ExecuteConfig config){
+		return String.format(EXECUTEJOBSELEICEPATH, config.getSystemName(), config.getJobName(), config.getSilenceJobName());
 	}
 }

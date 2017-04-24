@@ -1,5 +1,8 @@
 package com.lteam.job.core.config.execute;
 import com.lteam.job.common.config.Node;
+import com.lteam.job.common.config.NodePath;
+import com.lteam.job.common.config.NodeType;
+import com.lteam.job.common.execute.ExecuteConfig;
 /**
  * @Description:执行器节点
  * @author guicheng.huang
@@ -8,5 +11,16 @@ import com.lteam.job.common.config.Node;
  */
 public class ExecuteNode extends Node{
 
+	//任务分片节点路径
+	private String executejobSlicePath;
 	
+	public ExecuteNode(){
+		nodeType = NodeType.EXECUTENODE;
+		nodeName = ExecuteNode.class.getSimpleName().toLowerCase();
+	}
+	
+	public ExecuteNode addExecuteInfo(ExecuteConfig config){
+		executejobSlicePath = NodePath.getExecuteSlienceJobServicePath(config);
+		return this;
+	}
 }

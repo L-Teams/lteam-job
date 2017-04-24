@@ -11,7 +11,7 @@ public class Config {
 	
     private String systemName;
 	
-	private String jobName;
+	protected String jobName;
 	
 	public String getRootPath() {
 		return rootPath;
