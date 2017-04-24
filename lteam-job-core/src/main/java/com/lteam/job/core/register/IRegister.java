@@ -19,5 +19,13 @@ public interface IRegister {
 	 */
 	public void close();
 	
+	/**
+	 * 功能:添加注册信息
+	 * 逻辑:
+	 */
+	public void addRegisterInfo();
+	
+	
+	
 	
 }
