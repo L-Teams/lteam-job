@@ -13,6 +13,8 @@ public class NodePath {
 
 	public static final String ROOT = "/lteam-job";
 	
+	static final String JOBPATH = ROOT+"/%s/%s";
+	
 	static final String CONFIGNODENAME = "confignode";
 	
 	static final String CONFIGNODEPATH = ROOT+"/%s/%s/"+CONFIGNODENAME;
@@ -51,6 +53,9 @@ public class NodePath {
 	
 	static final String LOGSERVICEPATH = ROOT+"/%s/%s/"+MASTERNODENAME+"/"+LOGSERVICENODENAME;
 	
+	public static String getJobPath(Config config){
+		return String.format(JOBPATH, config.getSystemName(), config.getJobName());
+	}
 	
 	public static String getConfigPath(Config config){
 		return String.format(CONFIGNODEPATH, config.getSystemName(), config.getJobName());

@@ -51,9 +51,10 @@ public class ZkRegisterCenter extends RegisterCenter{
 	}
 
 	public void inital() {
-		    Builder bulider = CuratorFrameworkFactory.builder().connectString(centerConfig.getServersList())
-		                                 .namespace(centerConfig.getNameSpace())
-		                                 .retryPolicy(new ExponentialBackoffRetry(centerConfig.getBaseSleepTimeMilliseconds(), centerConfig.getMaxRetries(), centerConfig.getMaxSleepTimeMilliseconds()));
+		    Builder bulider = CuratorFrameworkFactory.builder()
+		    		                                 .connectString(centerConfig.getServersList())
+		    		                                 .namespace(centerConfig.getNameSpace())
+		    		                                 .retryPolicy(new ExponentialBackoffRetry(centerConfig.getBaseSleepTimeMilliseconds(), centerConfig.getMaxRetries(), centerConfig.getMaxSleepTimeMilliseconds()));
 		    if (0 != centerConfig.getSessionTimeoutMilliseconds()) {
 		    	bulider.sessionTimeoutMs(centerConfig.getSessionTimeoutMilliseconds());
 	        }

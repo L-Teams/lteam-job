@@ -1,5 +1,6 @@
 package com.lteam.job.core.config.master;
 
+import com.lteam.job.common.config.Config;
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
@@ -26,9 +27,20 @@ public class MasterNode extends Node{
 	
 	private String logServiceContent;
 	
+	private String jobExecuteStatus;
+	
 	public MasterNode(){
 		nodeType = NodeType.MASTERNODE;
 		nodeName = MasterNode.class.getSimpleName().toLowerCase();
+	}
+	
+	public MasterNode(Config config){
+		nodeType = NodeType.MASTERNODE;
+		nodeName = MasterNode.class.getSimpleName().toLowerCase();
+		nodePath = NodePath.getMasterNodePath(config);
+		masterServerPath = NodePath.getMasterServerPath(config);
+		routingStrategyPath = NodePath.getRoutingStrategyPath(config);
+	    logServicePath = NodePath.getLogServicePath(config);
 	}
 	
 	public MasterNode addMasterInfo(MasterConfig config){

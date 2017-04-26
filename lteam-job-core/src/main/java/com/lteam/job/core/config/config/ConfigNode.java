@@ -1,15 +1,10 @@
 package com.lteam.job.core.config.config;
-import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.job.JobConfig;
-import com.lteam.job.common.job.JobInfoType;
-import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.common.util.GsonUtil;
-import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.config.IJobConfigService;
 
 /**
@@ -39,11 +34,13 @@ public class ConfigNode extends Node{
 	 * 逻辑:判断该job信息是否存在
 	 *     不存在则新增
 	 *     存在则更新confignode节点数据,更新的过程增加version,并获取version增加到版本节点,供还原任务版本使用
+	 *     强制选主
 	 * @throws Exception 
 	 */
 	public void storeJobInfo() throws Exception{
 		jobConfigService.addJobConfigInfo(this)
 		                .handleJobInfo();
+		//TODO 选主事件
 	}
 	
 	/**
@@ -73,17 +70,20 @@ public class ConfigNode extends Node{
 	
 	/**
 	 * 功能:销毁job
-	 * 逻辑:
+	 * 逻辑:删除job节点
+	 *    :需判断是否该job正在执行
+	 *    :如果正在执行则阻塞删除操作，等待操作完成删除
 	 */
-	private void destoryJob(){
-		
+	public void destoryJob(){
+		jobConfigService.addJobConfigInfo(this)
+        				.destoryJobInfo();
 	}
 	
 	/**
 	 * 功能:获取job信息
 	 * 逻辑:job 信息 json字符串->对象
 	 */
-	private JobConfig getJobInfo(){
+	public JobConfig getJobInfo(){
 		JobConfig config = GsonUtil.gsonToBean(nodeContent, JobConfig.class); 
 		return config;
 	}

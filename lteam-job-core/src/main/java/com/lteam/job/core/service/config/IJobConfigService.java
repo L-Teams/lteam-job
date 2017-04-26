@@ -23,5 +23,11 @@ public interface IJobConfigService {
 	 */
 	public void handleJobInfo();
 	
+	/**
+	 * 功能:销毁job信息
+	 * 逻辑:
+	 */
+	public void destoryJobInfo();
+	
 	
 }
