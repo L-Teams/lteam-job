@@ -1,5 +1,6 @@
 package com.lteam.job.core.config.config;
 import org.apache.curator.framework.CuratorFramework;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
@@ -9,6 +10,7 @@ import com.lteam.job.common.job.JobInfoType;
 import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
+import com.lteam.job.core.service.config.IJobConfigService;
 
 /**
  * @Description:JOB 配置信息节点
@@ -17,8 +19,10 @@ import com.lteam.job.core.register.impl.ZkRegisterCenter;
  * @version V0.0.1
  */
 public class ConfigNode extends Node{
-
 	
+	@Autowired 
+	private IJobConfigService jobConfigService;
+
 	public ConfigNode(){
 		nodeType = NodeType.CONFIGNODE;
 		nodeName = ConfigNode.class.getSimpleName().toLowerCase();
@@ -38,12 +42,8 @@ public class ConfigNode extends Node{
 	 * @throws Exception 
 	 */
 	public void storeJobInfo() throws Exception{
-		CuratorFramework cilent = ZkRegisterCenter.getCilent();
-		if(cilent.checkExists().forPath(nodePath) != null){
-			cilent.create().forPath(nodePath, nodeContent.getBytes());
-		}else{
-			cilent.setData().forPath(nodePath,nodeContent.getBytes());
-		}
+		jobConfigService.addJobConfigInfo(this)
+		                .handleJobInfo();
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class ConfigNode extends Node{
 	 * 逻辑:
 	 * @param version
 	 */
-	private void rollBackJobInfo(int version){
+	public void rollBackJobInfo(int version){
 		
 	}
 	
