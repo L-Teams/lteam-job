@@ -5,7 +5,10 @@ import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.job.JobConfig;
-import com.lteam.job.core.register.ZkRegisterCenter;
+import com.lteam.job.common.job.JobInfoType;
+import com.lteam.job.common.job.JobStatus;
+import com.lteam.job.common.util.GsonUtil;
+import com.lteam.job.core.register.impl.ZkRegisterCenter;
 
 /**
  * @Description:JOB 配置信息节点
@@ -22,7 +25,7 @@ public class ConfigNode extends Node{
 	}
 	
 	public ConfigNode addJobInfo(JobConfig jobConfig){
-		nodeContent = jobConfig.toString();//to json
+		nodeContent = GsonUtil.gsonString(jobConfig);//to json
 		nodePath = NodePath.getConfigPath(jobConfig);
 		return this;
 	}
@@ -39,9 +42,8 @@ public class ConfigNode extends Node{
 		if(cilent.checkExists().forPath(nodePath) != null){
 			cilent.create().forPath(nodePath, nodeContent.getBytes());
 		}else{
-			handleJobStatus();
+			cilent.setData().forPath(nodePath,nodeContent.getBytes());
 		}
-		
 	}
 	
 	/**
@@ -50,14 +52,6 @@ public class ConfigNode extends Node{
 	 * @param version
 	 */
 	private void rollBackJobInfo(int version){
-		
-	}
-	
-	/**
-	 * 功能:处理任务状态
-	 * 逻辑:
-	 */
-	private void handleJobStatus(){
 		
 	}
 	
@@ -87,9 +81,10 @@ public class ConfigNode extends Node{
 	
 	/**
 	 * 功能:获取job信息
-	 * 逻辑:
+	 * 逻辑:job 信息 json字符串->对象
 	 */
-	private void getJobInfo(){
-		
+	private JobConfig getJobInfo(){
+		JobConfig config = GsonUtil.gsonToBean(nodeContent, JobConfig.class); 
+		return config;
 	}
 }
