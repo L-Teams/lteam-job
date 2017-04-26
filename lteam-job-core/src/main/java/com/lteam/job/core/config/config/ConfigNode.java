@@ -32,12 +32,16 @@ public class ConfigNode extends Node{
 	 * 逻辑:判断该job信息是否存在
 	 *     不存在则新增
 	 *     存在则更新confignode节点数据,更新的过程增加version,并获取version增加到版本节点,供还原任务版本使用
+	 * @throws Exception 
 	 */
-	public void storeJobInfo(){
+	public void storeJobInfo() throws Exception{
 		CuratorFramework cilent = ZkRegisterCenter.getCilent();
-		if(cilent.checkExists().forPath(nodePath)){
-			
+		if(cilent.checkExists().forPath(nodePath) != null){
+			cilent.create().forPath(nodePath, nodeContent.getBytes());
+		}else{
+			handleJobStatus();
 		}
+		
 	}
 	
 	/**
@@ -46,6 +50,14 @@ public class ConfigNode extends Node{
 	 * @param version
 	 */
 	private void rollBackJobInfo(int version){
+		
+	}
+	
+	/**
+	 * 功能:处理任务状态
+	 * 逻辑:
+	 */
+	private void handleJobStatus(){
 		
 	}
 	

@@ -60,4 +60,32 @@
     </dependency>  
   </dependencies>  
   
+  <build>
+		<plugins>
+			<!-- 设置maven编译插件1.8 -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>${project.build.directory}</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>index.jsp</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+  </build>
 </project>
