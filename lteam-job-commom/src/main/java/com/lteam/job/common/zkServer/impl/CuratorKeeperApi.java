@@ -1,6 +1,7 @@
 package com.lteam.job.common.zkServer.impl;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.data.Stat;
+
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 
 /**
@@ -52,8 +53,16 @@ public class CuratorKeeperApi implements IZookeeperCilentApi{
 		      .forPath(path, data.getBytes());
 	}
 
+	public boolean versionComparison(String path, String data) throws Exception {
+		String ovData = getNodeData(path);
+		if(ovData != null && ovData.equals(data)){
+			return true;
+		}
+		return false;
+	}
+	
 	public <T> void setCientObject(T t) {
 		cilent = (CuratorFramework) t;
-	}
+	}	
 
 }

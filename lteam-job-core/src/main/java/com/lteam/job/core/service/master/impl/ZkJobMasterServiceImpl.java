@@ -19,7 +19,8 @@ public class ZkJobMasterServiceImpl implements IJobMasterService{
 
 	private static CuratorFramework cilent = null ;
 	@Autowired
-	private IZookeeperCilent 
+	private IZookeeperCilent zkCilent;
+	
 	static {
 		if(cilent == null){
 			cilent = ZkRegisterCenter.getCilent();

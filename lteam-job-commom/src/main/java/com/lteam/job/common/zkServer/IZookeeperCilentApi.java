@@ -58,6 +58,15 @@ public interface IZookeeperCilentApi {
 	public void updataNodeData(String path, String data) throws Exception;
 	
 	/**
+	 * 功能:版本对比
+	 * @param path
+	 * @param data
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean versionComparison(String path, String data) throws Exception;
+	
+	/**
 	 * 功能:设置连接客户端对象
 	 * @param t
 	 */

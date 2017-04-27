@@ -1,6 +1,5 @@
 package com.lteam.job.core.service.config.impl;
 import org.apache.curator.framework.CuratorFramework;
-import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.job.JobConfig;
@@ -22,12 +21,13 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 	private static CuratorFramework cilent = null ; 
 	
 	@Autowired
-	private IZookeeperCilentApi zkApi;
+	private static IZookeeperCilentApi zkApi;
 	
 	static {
 		if(cilent == null){
-			cilent = ZkRegisterCenter.getCilent();
+		   cilent = ZkRegisterCenter.getCilent();
 		}
+		zkApi.setCientObject(cilent);
 	}
 	
 	public IJobConfigService addJobConfigInfo(JobConfig config){
@@ -36,25 +36,21 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 	}
 	
 	//TODO -> Exception 自定义处理
-	//     -> 版本信息处理
 	public void handleJobInfo(){
 		try {
-            if(cilent.checkExists().forPath(configNode.getNodePath()) != null){
-               cilent.create()
-				     .creatingParentsIfNeeded()
-				     .forPath(configNode.getNodePath(), configNode.getNodeContent().getBytes());
-               Stat stat = new Stat();
-               cilent.getData().storingStatIn(stat).forPath(configNode.getNodePath());
-               
-            }else{
-            	
-            }
-			
+			if(!zkApi.isExistPath(configNode.getNodePath())){
+				zkApi.createNode(configNode.getNodePath(), configNode.getNodeContent());	
+			}else{
+				if(!zkApi.versionComparison(configNode.getNodePath(), configNode.getNodeContent())){
+					zkApi.updataNodeData(configNode.getNodePath(), configNode.getNodeContent());
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	//TODO -> Exception 自定义处理
 	public void destoryJobInfo(){
 		try {
 			cilent.delete()
@@ -65,7 +61,4 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 		}
 	}
 
-	public IJobConfigService addJobConfigInfo(ConfigNode config) {
-		return null;
-	}
 }
