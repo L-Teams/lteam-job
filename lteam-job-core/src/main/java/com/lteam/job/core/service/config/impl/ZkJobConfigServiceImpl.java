@@ -1,15 +1,13 @@
 package com.lteam.job.core.service.config.impl;
-
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.lteam.job.common.config.Config;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.job.JobConfig;
+import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.core.config.config.ConfigNode;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.config.IJobConfigService;
-import com.lteam.job.core.service.master.IJobMasterService;
 
 /**
  * @Description:
@@ -24,7 +22,7 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 	private static CuratorFramework cilent = null ; 
 	
 	@Autowired
-	private IJobMasterService jobMasterService;
+	private IZookeeperCilentApi zkApi;
 	
 	static {
 		if(cilent == null){
@@ -41,9 +39,17 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 	//     -> 版本信息处理
 	public void handleJobInfo(){
 		try {
-			cilent.create()
-			      .creatingParentsIfNeeded()
-			      .forPath(configNode.getNodePath(), configNode.getNodeContent().getBytes());
+            if(cilent.checkExists().forPath(configNode.getNodePath()) != null){
+               cilent.create()
+				     .creatingParentsIfNeeded()
+				     .forPath(configNode.getNodePath(), configNode.getNodeContent().getBytes());
+               Stat stat = new Stat();
+               cilent.getData().storingStatIn(stat).forPath(configNode.getNodePath());
+               
+            }else{
+            	
+            }
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,13 +57,15 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 
 	public void destoryJobInfo(){
 		try {
-			Config c =new Config();
-			jobMasterService.addJobConfigInfo(c);
 			cilent.delete()
 			      .deletingChildrenIfNeeded()
-			      .forPath(NodePath.getJobPath(config.getJobInfo()));
+			      .forPath(NodePath.getJobPath(configNode.getJobInfo()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public IJobConfigService addJobConfigInfo(ConfigNode config) {
+		return null;
 	}
 }
