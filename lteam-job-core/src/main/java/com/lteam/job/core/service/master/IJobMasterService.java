@@ -13,12 +13,6 @@ import com.lteam.job.core.config.master.MasterNode;
 public interface IJobMasterService {
  
 	/**
-	 * 功能:添加配置信息
-	 * @return
-	 */
-	public IJobMasterService addJobConfigInfo(MasterNode config);
-	
-	/**
 	 * 功能:选主
 	 * @return
 	 */

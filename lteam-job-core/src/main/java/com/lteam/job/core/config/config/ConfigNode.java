@@ -39,7 +39,6 @@ public class ConfigNode extends Node{
 	 * 逻辑:判断该job信息是否存在
 	 *     不存在则新增
 	 *     存在则更新confignode节点数据,更新的过程增加version,并获取version增加到版本节点,供还原任务版本使用
-	 *     强制选主
 	 * @throws Exception 
 	 */
 	public void storeJobInfo() throws Exception{
@@ -48,7 +47,6 @@ public class ConfigNode extends Node{
 		                .handleJobInfo();
 		//版本处理
 		jobVersionService.addVersionInfo(versionConfig);
-		//选主处理
 	}
 	
 	/**

@@ -1,7 +1,8 @@
 package com.lteam.job.common.zkServer.impl;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.cache.NodeCache;
+import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.zookeeper.data.Stat;
-
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 
 /**
@@ -65,4 +66,10 @@ public class CuratorKeeperApi implements IZookeeperCilentApi{
 		cilent = (CuratorFramework) t;
 	}	
 
+	public void addNodeListener(String path, boolean dataIsCompressed, NodeCacheListener listener) throws Exception{
+		final NodeCache cache = new NodeCache(cilent, path, dataIsCompressed);
+		cache.start(true);
+		cache.getListenable().addListener(listener);
+		cache.close();
+	}
 }

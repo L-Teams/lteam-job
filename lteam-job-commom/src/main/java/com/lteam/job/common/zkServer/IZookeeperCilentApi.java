@@ -1,5 +1,6 @@
 package com.lteam.job.common.zkServer;
 
+import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.zookeeper.data.Stat;
 
 /**
@@ -71,5 +72,12 @@ public interface IZookeeperCilentApi {
 	 * @param t
 	 */
 	public <T> void setCientObject(T t);
+	
+	/**
+	 * 功能:给节点添加监听器
+	 * @param path
+	 * @throws Exception 
+	 */
+	public void addNodeListener(String path, boolean dataIsCompressed, NodeCacheListener listener) throws Exception;
 	
 }

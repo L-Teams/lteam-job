@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lteam.job.common.execute.ExecuteResult;
 import com.lteam.job.common.job.JobStatus;
+import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.core.config.master.MasterNode;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.master.IJobMasterService;
@@ -19,7 +20,7 @@ public class ZkJobMasterServiceImpl implements IJobMasterService{
 
 	private static CuratorFramework cilent = null ;
 	@Autowired
-	private IZookeeperCilent zkCilent;
+	private IZookeeperCilentApi zkCilent;
 	
 	static {
 		if(cilent == null){
@@ -39,13 +40,8 @@ public class ZkJobMasterServiceImpl implements IJobMasterService{
 		return null;
 	}
 
-	public IJobMasterService addJobConfigInfo(MasterNode config) {
-		// TODO Auto-generated method stub
-		return this;
-	}
-
 	public MasterNode masterServer() {
-		// TODO Auto-generated method stub
+	     
 		return null;
 	}
 
