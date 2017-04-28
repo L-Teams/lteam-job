@@ -1,16 +1,11 @@
 package com.lteam.job.core.service.version.impl;
-
 import java.util.List;
-
 import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.version.VersionConfig;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
-import com.lteam.job.core.config.config.ConfigNode;
 import com.lteam.job.core.config.version.VersionNode;
+import com.lteam.job.core.listener.VersionIterationListener;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.version.IJobVersionService;
 
@@ -37,23 +32,19 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 	}
 	
 	public List<VersionConfig> getJobVersionList() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public VersionConfig getCurrentVersion() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void handleVersionInfo() {
-		NodeCacheListener listener = new NodeCacheListener() {
-			
-			public void nodeChanged() throws Exception {
-				
-			}
-		};
-		zkApi.addNodeListener(NodePath.getConfigPath(versionNode), true, listener);
+		try {
+			zkApi.addNodeListener(versionNode.getNodeContent(), true, new VersionIterationListener());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void addVersionInfo(VersionConfig versionConfig) {
@@ -61,7 +52,6 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 	}
 
 	public void destoryVersionInfo(int version) {
-		// TODO Auto-generated method stub
 
 	}
 
