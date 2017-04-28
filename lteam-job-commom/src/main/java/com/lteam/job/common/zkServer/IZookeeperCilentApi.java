@@ -1,7 +1,10 @@
 package com.lteam.job.common.zkServer;
 
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
+
+import com.lteam.job.common.config.Node;
 
 /**
  * @Description:zookeeper操作封装接口
@@ -25,7 +28,23 @@ public interface IZookeeperCilentApi {
 	 * @param data
 	 * @throws Exception 
 	 */
-	public void createNode(String path,String data) throws Exception;
+	public void createNode(Node node) throws Exception;
+	
+	/**
+	 * 功能:创建节点
+	 * @param path
+	 * @param data
+	 * @throws Exception 
+	 */
+	public void createNode(Node node,CreateMode mode) throws Exception;
+	
+	/**
+	 * 功能:获取结点的数据
+	 * @param path
+	 * @return
+	 * @throws Exception 
+	 */
+	public String getNodeData(Node node) throws Exception;
 	
 	/**
 	 * 功能:获取结点的数据
@@ -41,6 +60,14 @@ public interface IZookeeperCilentApi {
 	 * @return
 	 * @throws Exception 
 	 */
+	public Stat getNodeStatusInfo(Node node) throws Exception;
+	
+	/**
+	 * 功能:获取结点的状态信息
+	 * @param path
+	 * @return
+	 * @throws Exception 
+	 */
 	public Stat getNodeStatusInfo(String path) throws Exception;
 	
 	/**
@@ -48,7 +75,14 @@ public interface IZookeeperCilentApi {
 	 * @param path
 	 * @throws Exception 
 	 */
-	public void deleteNode(String path) throws Exception;
+	public void deleteNodeIncludeLeafNode(String path) throws Exception;
+	
+	/**
+	 * 功能:删除节点包括子结点
+	 * @param path
+	 * @throws Exception 
+	 */
+	public void deleteNodeIncludeLeafNode(Node node) throws Exception;
 	
 	/**
 	 * 功能:修改节点的数据信息
@@ -56,7 +90,7 @@ public interface IZookeeperCilentApi {
 	 * @param data
 	 * @throws Exception 
 	 */
-	public void updataNodeData(String path, String data) throws Exception;
+	public void updataNodeData(Node node) throws Exception;
 	
 	/**
 	 * 功能:版本对比
@@ -65,11 +99,11 @@ public interface IZookeeperCilentApi {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean versionComparison(String path, String data) throws Exception;
+	public boolean versionComparison(Node node) throws Exception;
 	
 	/**
 	 * 功能:设置连接客户端对象
-	 * @param t
+	 * @param t : 兼容其他连接对象->后期可能兼容mysql实现
 	 */
 	public <T> void setCientObject(T t);
 	

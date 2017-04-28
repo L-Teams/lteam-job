@@ -1,6 +1,8 @@
 package com.lteam.job.core.service.config.impl;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.zookeeper.CreateMode;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
@@ -39,10 +41,10 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 	public void handleJobInfo(){
 		try {
 			if(!zkApi.isExistPath(configNode.getNodePath())){
-				zkApi.createNode(configNode.getNodePath(), configNode.getNodeContent());	
+				zkApi.createNode(configNode);	
 			}else{
-				if(!zkApi.versionComparison(configNode.getNodePath(), configNode.getNodeContent())){
-					zkApi.updataNodeData(configNode.getNodePath(), configNode.getNodeContent());
+				if(!zkApi.versionComparison(configNode)){
+					zkApi.updataNodeData(configNode);
 				}
 			}
 		} catch (Exception e) {
