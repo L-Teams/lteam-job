@@ -2,6 +2,8 @@ package com.lteam.job.core.listener;
 
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 
+import com.lteam.job.common.zkServer.IZookeeperCilentApi;
+
 /**
  * @Description:版本迭代监听
  *             :job配置信息修改时触发

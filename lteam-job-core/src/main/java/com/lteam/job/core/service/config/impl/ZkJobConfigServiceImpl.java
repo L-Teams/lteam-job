@@ -1,9 +1,6 @@
 package com.lteam.job.core.service.config.impl;
 import org.apache.curator.framework.CuratorFramework;
-import org.apache.zookeeper.CreateMode;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.core.config.config.ConfigNode;
@@ -55,9 +52,7 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 	//TODO -> Exception 自定义处理
 	public void destoryJobInfo(){
 		try {
-			cilent.delete()
-			      .deletingChildrenIfNeeded()
-			      .forPath(NodePath.getJobPath(configNode.getJobInfo()));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
