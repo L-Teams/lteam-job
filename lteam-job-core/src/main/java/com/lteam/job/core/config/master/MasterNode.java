@@ -4,7 +4,9 @@ import com.lteam.job.common.config.Config;
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
+import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.master.MasterConfig;
+import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.core.config.server.ServersNode;
 
 /**
@@ -27,8 +29,14 @@ public class MasterNode extends Node{
 	
 	private String logServiceContent;
 	
-	private String jobExecuteStatus;
+	private String jobExecuteStatusPath;
 	
+	private String jobExecuteStatusContent;
+	
+	private String jobExecuteResult;
+	
+	private String jobExecuteResultContent;
+	 
 	public MasterNode(){
 		nodeType = NodeType.MASTERNODE;
 		nodeName = MasterNode.class.getSimpleName().toLowerCase();
@@ -51,6 +59,7 @@ public class MasterNode extends Node{
 	    routingStrategyContent = config.getRouingType().toString(); //TODO->JSON
 	    logServicePath = NodePath.getLogServicePath(config);
 	    logServiceContent = config.getLogInterFace();//TODO->JSON
+	    nodeContent = GsonUtil.gsonString(config);
 		return this;
 	}
 	
@@ -65,7 +74,16 @@ public class MasterNode extends Node{
 	/**
 	 * 功能:获取主节点信息
 	 */
-	private void getMarsterServerInfo(){
+	public void getMarsterServerInfo(){
 		
+	}
+	
+	/**
+	 * 功能:获取节点的配置信息
+	 * @return
+	 */
+	public MasterConfig getMasterInfo(){
+		MasterConfig config = GsonUtil.gsonToBean(nodeContent, MasterConfig.class); 
+		return config;
 	}
 }

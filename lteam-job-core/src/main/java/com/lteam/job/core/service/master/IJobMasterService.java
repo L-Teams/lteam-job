@@ -1,8 +1,12 @@
 package com.lteam.job.core.service.master;
 
+import com.lteam.job.common.config.Config;
 import com.lteam.job.common.execute.ExecuteResult;
+import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.job.JobStatus;
+import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.core.config.master.MasterNode;
+import com.lteam.job.core.service.config.IJobConfigService;
 
 /**
  * @Description:
@@ -11,7 +15,14 @@ import com.lteam.job.core.config.master.MasterNode;
  * @version V0.0.1
  */
 public interface IJobMasterService {
- 
+	
+	/**
+	 * 功能:添加主节点配置信息
+	 * @param config
+	 * @return
+	 */
+	public IJobMasterService addMasterConfigInfo(Config config);
+	
 	/**
 	 * 功能:选主
 	 * @return

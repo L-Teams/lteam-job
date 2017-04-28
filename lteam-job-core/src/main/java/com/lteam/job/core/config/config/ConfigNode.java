@@ -46,7 +46,7 @@ public class ConfigNode extends Node{
 		jobConfigService.addJobConfigInfo(getJobInfo())
 		                .handleJobInfo();
 		//版本处理
-		jobVersionService.addVersionInfo(versionConfig);
+		//jobVersionService.addVersionInfo(versionConfig);
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class ConfigNode extends Node{
 	 *    :如果正在执行则阻塞删除操作，等待操作完成删除
 	 */
 	public void destoryJob(){
-		jobConfigService.addJobConfigInfo(this)
+		jobConfigService.addJobConfigInfo(getJobInfo())
         				.destoryJobInfo();
 	}
 	

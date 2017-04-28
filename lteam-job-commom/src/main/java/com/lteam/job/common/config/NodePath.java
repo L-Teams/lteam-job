@@ -4,7 +4,7 @@ import com.lteam.job.common.execute.ExecuteConfig;
 import com.lteam.job.common.server.ServerConfig;
 
 /**
- * @Description:
+ * @Description:lteam-job服务zookeeper节点路径
  * @author guicheng.huang
  * @date: 2017年4月18日 下午6:11:11
  * @version V0.0.1
@@ -43,15 +43,23 @@ public class NodePath {
 	
 	static final String MASTERSERVERNODENAME = "masterserver";
 	
-	static final String MASTERSERVERPATH = ROOT+"/%s/%s/"+MASTERNODENAME+"/"+MASTERSERVERNODENAME;
+	static final String MASTERSERVERPATH = MASTERNODEPATH+"/"+MASTERSERVERNODENAME;
 	
 	static final String ROUTINGSTRATEGYNODENAME = "routStrategy";
 	
-	static final String ROUTINGSTRATEGYPATH = ROOT+"/%s/%s/"+MASTERNODENAME+"/"+ROUTINGSTRATEGYNODENAME;
+	static final String ROUTINGSTRATEGYPATH = MASTERNODEPATH+"/"+ROUTINGSTRATEGYNODENAME;
 	
 	static final String LOGSERVICENODENAME = "logservice";
 	
-	static final String LOGSERVICEPATH = ROOT+"/%s/%s/"+MASTERNODENAME+"/"+LOGSERVICENODENAME;
+	static final String LOGSERVICEPATH = MASTERNODEPATH+"/"+LOGSERVICENODENAME;
+	
+	static final String JOBEXECUTESTATUSNODENAME = "jobexecutestatus";
+	
+	static final String JOBEXECUTESTATUSPATH = MASTERNODEPATH+"/"+JOBEXECUTESTATUSNODENAME;
+	
+	static final String JOBEXECUTETRESULTNODENAME = "jobexecuteresult";
+	
+	static final String JOBEXECUTETRESULTPATH =  MASTERNODEPATH+"/"+JOBEXECUTETRESULTNODENAME;
 	
 	public static String getJobPath(Config config){
 		return String.format(JOBPATH, config.getSystemName(), config.getJobName());
@@ -87,6 +95,14 @@ public class NodePath {
 	
 	public static String getLogServicePath(Config config){
 		return String.format(LOGSERVICEPATH, config.getSystemName(), config.getJobName());
+	}
+	
+	public static String getJobExecuteStatus(Config config){
+		return String.format(JOBEXECUTESTATUSPATH, config.getSystemName(), config.getJobName());
+	}
+	
+	public static String getJobExecuteResult(Config config){
+		return String.format(JOBEXECUTETRESULTPATH, config.getSystemName(), config.getJobName());
 	}
 	
 	public static String getExecuteServicePath(Config config){
