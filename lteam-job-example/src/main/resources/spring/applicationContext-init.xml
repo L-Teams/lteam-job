@@ -11,7 +11,7 @@
 
     <!-- 任务配置信息 -->
     <bean id="job" class="com.lteam.job.common.job.JobConfig">
-        <property name="systemName" value="lteam-job-example"/>
+        <property name="systemName" value="lteam-job-example-spring"/>
 		<property name="jobName" value="simpleJob"/>
 		<property name="jobCron" value="0 0/30 * * * ?"/>
 		<property name="jobSliceNum" value="3"/>

@@ -61,6 +61,10 @@ public class NodePath {
 	
 	static final String JOBEXECUTETRESULTPATH =  MASTERNODEPATH+"/"+JOBEXECUTETRESULTNODENAME;
 	
+	static final String VERSIONNODENAME = "versionnode";
+	
+	static final String VERSIONPATH = ROOT+"/%s/%s/"+VERSIONNODENAME;;
+	
 	public static String getJobPath(Config config){
 		return String.format(JOBPATH, config.getSystemName(), config.getJobName());
 	}
@@ -111,5 +115,9 @@ public class NodePath {
 	
 	public static String getExecuteSlienceJobServicePath(ExecuteConfig config){
 		return String.format(EXECUTEJOBSELEICEPATH, config.getSystemName(), config.getJobName(), config.getSilenceJobName());
+	}
+	
+	public static String getVersionPath(Config config){
+		return String.format(VERSIONPATH, config.getSystemName(), config.getJobName());
 	}
 }

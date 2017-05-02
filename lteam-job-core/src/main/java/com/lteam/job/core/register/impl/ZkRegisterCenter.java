@@ -2,13 +2,11 @@ package com.lteam.job.core.register.impl;
 import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.lteam.job.common.job.JobConfig;
-import com.lteam.job.common.master.MasterConfig;
-import com.lteam.job.common.server.ServerConfig;
 import com.lteam.job.common.zkServer.factory.CuratorFactory;
 import com.lteam.job.common.zkServer.factory.config.RegisterCenterConfig;
 import com.lteam.job.core.config.config.ConfigNode;
-import com.lteam.job.core.config.master.MasterNode;
 import com.lteam.job.core.config.server.ServersNode;
 
 /**
@@ -91,7 +89,7 @@ public class ZkRegisterCenter extends RegisterCenter{
      * 逻辑:
      */
 	public void registerServerConfigInfo() {
-		// new ServersNode().addServerInfo(new ServerConfig(jobConfig)).storeServerInfo();
+		 //new ServersNode().addServerInfo(new ServerConfig(jobConfig)).storeServerInfo();
 	}
 
 	/**

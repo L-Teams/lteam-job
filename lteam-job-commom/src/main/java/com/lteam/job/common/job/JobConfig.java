@@ -28,6 +28,13 @@ public class JobConfig extends Config{
 	
 	private JobStatus jonStatus = JobStatus.RUN;
 	
+	//zookeeper支持job信息存储最大数量
+	private final Integer maxVersionNumber = 5;
+		
+	public Integer getMaxVersionNumber() {
+		return maxVersionNumber;
+	}
+
 	public JobConfig(){}
 	
 	public JobConfig(String jobName, String jobCron){
