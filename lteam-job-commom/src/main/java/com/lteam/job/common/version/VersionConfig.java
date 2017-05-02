@@ -22,8 +22,8 @@ public class VersionConfig {
 	//版本状态,默认当前应用版本
 	private VersionStatus verStatus = VersionStatus.NOW;
      
-	//版本创建日期
-	private Date createDate;
+	//版本创建日期,默认当前日期
+	private Date createDate = new Date();
 	
 	public Date getCreateDate() {
 		return createDate;
