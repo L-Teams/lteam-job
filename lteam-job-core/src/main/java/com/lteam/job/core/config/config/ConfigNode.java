@@ -38,15 +38,13 @@ public class ConfigNode extends Node{
 	 * 功能:存储job config信息到zookeeper
 	 * 逻辑:判断该job信息是否存在
 	 *     不存在则新增
-	 *     存在则更新confignode节点数据,更新的过程增加version,并获取version增加到版本节点,供还原任务版本使用
+	 *     存在则更新confignode节点数据,更新的过程增加version,并获取version增加到版本节点,供还原任务版本使用->转移到单独的版本控制注册器
 	 * @throws Exception 
 	 */
 	public void storeJobInfo() throws Exception{
 		//job信息处理
 		jobConfigService.addJobConfigInfo(getJobInfo())
 		                .handleJobInfo();
-		//版本处理
-		//jobVersionService.addVersionInfo(versionConfig);
 	}
 	
 	/**
@@ -62,7 +60,7 @@ public class ConfigNode extends Node{
 	 * 功能:暂停job,如果当前job在执行,需保证当前job执行完在停止
 	 * 逻辑:
 	 */
-	private void stopJob(){
+	public void stopJob(){
 		
 	}
 	
@@ -70,7 +68,7 @@ public class ConfigNode extends Node{
 	 * 功能:启动job
 	 * 逻辑:
 	 */
-	private void runJob(){
+	public void runJob(){
 		
 	}
 	

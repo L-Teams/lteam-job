@@ -39,4 +39,9 @@ public abstract class RegisterCenter implements IRegister{
 	 * 逻辑:
 	 */
 	public abstract void registerExecuterConfigInfo();
+	
+	/**
+	 * 功能:注册版本信息
+	 */
+	public abstract void registerVersionConfigInfo();
 }

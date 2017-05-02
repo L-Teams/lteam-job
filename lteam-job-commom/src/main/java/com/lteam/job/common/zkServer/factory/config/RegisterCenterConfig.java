@@ -1,4 +1,4 @@
-package com.lteam.job.core.register.config;
+package com.lteam.job.common.zkServer.factory.config;
 /**
  * @Description:注册中心配置信息
  * @author guicheng.huang
@@ -9,7 +9,7 @@ public class RegisterCenterConfig {
 
 	private String serversList;//注册中心服务地址
 	
-	private String nameSpace = "/lteam-job"; //默认命名空间为/lteam-job
+	private String nameSpace = "lteam-job"; //默认命名空间为lteam-job
 
     private int baseSleepTimeMilliseconds = 1000;
     

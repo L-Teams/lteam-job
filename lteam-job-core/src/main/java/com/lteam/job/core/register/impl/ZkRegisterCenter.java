@@ -1,16 +1,13 @@
 package com.lteam.job.core.register.impl;
 import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
-import org.apache.curator.retry.ExponentialBackoffRetry;
-
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.common.server.ServerConfig;
+import com.lteam.job.common.zkServer.factory.CuratorFactory;
+import com.lteam.job.common.zkServer.factory.config.RegisterCenterConfig;
 import com.lteam.job.core.config.config.ConfigNode;
 import com.lteam.job.core.config.master.MasterNode;
 import com.lteam.job.core.config.server.ServersNode;
-import com.lteam.job.core.register.config.RegisterCenterConfig;
 
 /**
  * @Description:基于zookeeper注册中心实现
@@ -41,7 +38,6 @@ public class ZkRegisterCenter extends RegisterCenter{
 		return cilent;
 	}
 
-	
 	public RegisterCenterConfig getCenterConfig() {
 		return centerConfig;
 	}
@@ -51,18 +47,11 @@ public class ZkRegisterCenter extends RegisterCenter{
 	}
 
 	public void inital() {
-		    Builder bulider = CuratorFrameworkFactory.builder()
-		    		                                 .connectString(centerConfig.getServersList())
-		    		                                 .namespace(centerConfig.getNameSpace())
-		    		                                 .retryPolicy(new ExponentialBackoffRetry(centerConfig.getBaseSleepTimeMilliseconds(), centerConfig.getMaxRetries(), centerConfig.getMaxSleepTimeMilliseconds()));
-		    if (0 != centerConfig.getSessionTimeoutMilliseconds()) {
-		    	bulider.sessionTimeoutMs(centerConfig.getSessionTimeoutMilliseconds());
-	        }
-	        if (0 != centerConfig.getConnectionTimeoutMilliseconds()) {
-	        	bulider.connectionTimeoutMs(centerConfig.getConnectionTimeoutMilliseconds());
-	        }
-	        cilent = bulider.build();
-		    cilent.start();       
+		//获取连接对象
+		cilent = CuratorFactory.getCurator(centerConfig);
+		cilent.start();
+		//注册信息
+		addRegisterInfo();
 	}
 
 	public void close() {
@@ -77,6 +66,7 @@ public class ZkRegisterCenter extends RegisterCenter{
 		registerSilenceJobConfigInfo();
 		registerMasterConfigInfo();
 		registerExecuterConfigInfo();
+		registerVersionConfigInfo();
 	}
 
 	/**
@@ -84,7 +74,11 @@ public class ZkRegisterCenter extends RegisterCenter{
 	 * 逻辑:
 	 */
 	public void registerJobConfigInfo() {
-	     new ConfigNode().addJobInfo(jobConfig).storeJobInfo();
+	     try {
+			new ConfigNode().addJobInfo(jobConfig).storeJobInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
     /**
@@ -92,7 +86,7 @@ public class ZkRegisterCenter extends RegisterCenter{
      * 逻辑:
      */
 	public void registerServerConfigInfo() {
-		 new ServersNode().addServerInfo(new ServerConfig(jobConfig)).storeServerInfo();
+		// new ServersNode().addServerInfo(new ServerConfig(jobConfig)).storeServerInfo();
 	}
 
 	/**
@@ -108,7 +102,7 @@ public class ZkRegisterCenter extends RegisterCenter{
 	 * 逻辑:
 	 */
 	public void registerMasterConfigInfo() {
-		new MasterNode().addMasterInfo(new MasterConfig(jobConfig)).storeMasterServerInfo();
+	//	new MasterNode().addMasterInfo(new MasterConfig(jobConfig)).storeMasterServerInfo();
 	}
 
 	/**
@@ -116,7 +110,15 @@ public class ZkRegisterCenter extends RegisterCenter{
 	 * 逻辑:
 	 */
 	public void registerExecuterConfigInfo() {
-		//new ExecuteNode().addExecuteInfo(new ExecuteConfig(jobConfig)).
+		
+	}
+	
+	/**
+	 * 功能:注册版本信息
+	 * 逻辑:
+	 */
+	public void registerVersionConfigInfo(){
+		
 	}
 
 }

@@ -1,6 +1,8 @@
-package com.lteam.example.javajob;
+package com.lteam.example.springjob;
 
 import java.util.Date;
+
+import com.lteam.job.core.api.AbstractJob;
 
 /**
  * @Description:任务定义
@@ -8,9 +10,12 @@ import java.util.Date;
  * @date: 2017年4月24日 下午3:41:41
  * @version V0.0.1
  */
-public class simpleJob {
+public class SimpleJob extends AbstractJob{
 
-	public void executeJob(){
+	@Override
+	public void execute() {
 		System.out.println(new Date());
 	}
+
+	
 }

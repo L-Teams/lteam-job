@@ -12,7 +12,7 @@ import com.lteam.job.core.service.config.IJobConfigService;
 import com.lteam.job.core.service.master.IJobMasterService;
 
 /**
- * @Description:
+ * @Description:job配置信息服务实现类
  * @author guicheng.huang
  * @date: 2017年4月26日 下午3:11:54
  * @version V0.0.1

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+	default-autowire="byName">
+
+    <!-- 任务配置信息 -->
+    <bean id="job" class="com.lteam.job.common.job.JobConfig">
+        <property name="systemName" value="lteam-job-example"/>
+		<property name="jobName" value="simpleJob"/>
+		<property name="jobCron" value="0 0/30 * * * ?"/>
+		<property name="jobSliceNum" value="3"/>
+		<property name="jobSliceStrategy" value="A=1;B=2;C=3"/>
+		<property name="jobMaster" value="hgc"/>
+		<property name="masterEmail" value="862896568@qq.com"/>
+	</bean>
+    
+    <!-- zookeeper连接信息 -->
+    <bean id="zkConfig" class="com.lteam.job.common.zkServer.factory.config.RegisterCenterConfig">
+        <property name="serversList" value="localhost:2181"/>
+        <property name="sessionTimeoutMilliseconds" value="1000"/>
+        <property name="connectionTimeoutMilliseconds" value="1000"/>
+        <property name="baseSleepTimeMilliseconds" value="1000"/>
+        <property name="maxSleepTimeMilliseconds" value="3000"/>
+        <property name="maxRetries" value="3"/>
+    </bean>
+ 
+    <!-- 注册中心 -->
+	<bean id="registerCenter" class="com.lteam.job.core.register.impl.ZkRegisterCenter" init-method="inital">
+	    <property name="jobConfig" ref="job"/>
+	    <property name="centerConfig" ref="zkConfig"/>
+	</bean>
+	
+</beans>

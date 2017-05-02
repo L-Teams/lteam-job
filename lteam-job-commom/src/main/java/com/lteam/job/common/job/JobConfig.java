@@ -38,45 +38,46 @@ public class JobConfig extends Config{
 	}
 	
 	public JobConfig builer(String jobName, String jobCron){
-		return new JobConfig(jobName, jobCron);
+		this.jobName = jobName;
+		this.jobCron = jobCron;
+		return this;
 	}
 
-	private JobConfig addJobStatus(JobStatus jobStatus){
+	public JobConfig addJobStatus(JobStatus jobStatus){
 		this.setJonStatus(jonStatus);
 		return this;
 	}
 	
-	private JobConfig addJobDescripte(String jobDescripte){
+	public JobConfig addJobDescripte(String jobDescripte){
 		this.setJobDescripte(jobDescripte);
 		return this;
 	}
 
-	private JobConfig addJobMaster(String jobMaster){
+	public JobConfig addJobMaster(String jobMaster){
 		this.setJobMaster(jobMaster);
 		return this;
 	}
 	
-	private JobConfig addMasterEmail(String masterEmail){
+	public JobConfig addMasterEmail(String masterEmail){
 		this.setMasterEmail(masterEmail);
 		return this;
 	}
 	
-	private JobConfig addJobSliceNum(int jobSliceNum){
+	public JobConfig addJobSliceNum(int jobSliceNum){
 		this.setJobSliceNum(jobSliceNum);
 		return this;
 	}
 	
-	private JobConfig addJobSliceStrategy(String jobSliceStrategy){
+	public JobConfig addJobSliceStrategy(String jobSliceStrategy){
 		this.setJobSliceStrategy(jobSliceStrategy);
 		return this;
 	}
-	
-	private JobConfig addChildrenJobName(String childrenJobName){
+	public JobConfig addChildrenJobName(String childrenJobName){
 		this.setChildrenJobName(childrenJobName);
 		return this;
 	}
 	
-	private JobConfig addExecuteRule(String executeRule){
+	public JobConfig addExecuteRule(String executeRule){
 		this.setExecuteRule(executeRule);
 		return this;
 	}
