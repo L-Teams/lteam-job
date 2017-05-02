@@ -11,7 +11,7 @@ public class Config {
 	
     private String systemName;
 	
-	protected String jobName;
+    public String jobName;
 	
 	public Config(){}
 	

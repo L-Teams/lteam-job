@@ -9,8 +9,6 @@ import com.lteam.job.common.config.Config;
  * @version V0.0.1
  */
 public class JobConfig extends Config{
-
-	private String jobName;
 	
 	private String jobCron;
 	

@@ -1,7 +1,10 @@
 package com.lteam.job.core.service.version.impl;
 import java.util.List;
+
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.lteam.job.common.version.VersionConfig;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.core.config.version.VersionNode;
@@ -15,6 +18,7 @@ import com.lteam.job.core.service.version.IJobVersionService;
  * @date: 2017年4月27日 下午2:35:15
  * @version V0.0.1
  */
+@Service
 public class ZkJobVersionServiceImpl implements IJobVersionService {
 
 	private VersionNode versionNode;

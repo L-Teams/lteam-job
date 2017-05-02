@@ -1,13 +1,11 @@
 package com.lteam.job.core.config.config;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.core.service.config.IJobConfigService;
-import com.lteam.job.core.service.version.IJobVersionService;
+import com.lteam.job.core.service.config.impl.ZkJobConfigServiceImpl;
 
 /**
  * @Description:JOB 配置信息节点
@@ -17,11 +15,8 @@ import com.lteam.job.core.service.version.IJobVersionService;
  */
 public class ConfigNode extends Node{
 	
-	@Autowired 
-	private IJobConfigService jobConfigService;
-	
-	@Autowired 
-	private IJobVersionService jobVersionService;
+
+	private IJobConfigService jobConfigService = new ZkJobConfigServiceImpl();
 	
 	public ConfigNode(){
 		nodeType = NodeType.CONFIGNODE;

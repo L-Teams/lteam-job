@@ -2,6 +2,7 @@ package com.lteam.job.core.service.master.impl;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.lteam.job.common.config.Config;
@@ -21,13 +22,13 @@ import com.lteam.job.core.service.master.IJobMasterService;
  * @date: 2017年4月26日 下午5:16:40
  * @version V0.0.1
  */
+@Service
 public class ZkJobMasterServiceImpl implements IJobMasterService{
 
 	private MasterNode masterNode;
 	
 	private static CuratorFramework cilent = null ;
 	
-	@Autowired
 	private static IZookeeperCilentApi zkApi;
 	
 	static {

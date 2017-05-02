@@ -1,15 +1,19 @@
 package com.lteam.job.core.service.config.impl;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
+import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
 import com.lteam.job.core.config.config.ConfigNode;
 import com.lteam.job.core.listener.DestoryJobListener;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.config.IJobConfigService;
 import com.lteam.job.core.service.master.IJobMasterService;
+import com.lteam.job.core.service.master.impl.ZkJobMasterServiceImpl;
 
 /**
  * @Description:job配置信息服务实现类
@@ -17,16 +21,16 @@ import com.lteam.job.core.service.master.IJobMasterService;
  * @date: 2017年4月26日 下午3:11:54
  * @version V0.0.1
  */
+@Service
 public class ZkJobConfigServiceImpl implements IJobConfigService{
 
 	private ConfigNode configNode;
 	
 	private static CuratorFramework cilent = null ; 
 	
-	@Autowired
-	private static IZookeeperCilentApi zkApi;
-	@Autowired
-	private IJobMasterService jobMasterService;
+	private static IZookeeperCilentApi zkApi = new CuratorKeeperApiImpl();
+	
+	private IJobMasterService jobMasterService = new ZkJobMasterServiceImpl();
 	
 	static {
 		if(cilent == null){
