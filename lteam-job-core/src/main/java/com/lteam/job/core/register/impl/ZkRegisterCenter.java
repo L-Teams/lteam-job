@@ -1,5 +1,7 @@
 package com.lteam.job.core.register.impl;
 import org.apache.curator.framework.CuratorFramework;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.common.server.ServerConfig;
@@ -17,6 +19,8 @@ import com.lteam.job.core.config.server.ServersNode;
  */
 public class ZkRegisterCenter extends RegisterCenter{
 
+	private static final Logger logger = LoggerFactory.getLogger(ZkRegisterCenter.class);
+	 
 	//注册中心配置
 	private RegisterCenterConfig centerConfig;
 	
@@ -76,6 +80,7 @@ public class ZkRegisterCenter extends RegisterCenter{
 	public void registerJobConfigInfo() {
 	     try {
 			new ConfigNode().addJobInfo(jobConfig).storeJobInfo();
+			logger.info("register job config info");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

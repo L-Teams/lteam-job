@@ -1,10 +1,10 @@
 package com.lteam.job.common.zkServer.factory;
-
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.lteam.job.common.zkServer.factory.config.RegisterCenterConfig;
 
 /**
@@ -14,11 +14,15 @@ import com.lteam.job.common.zkServer.factory.config.RegisterCenterConfig;
  * @version V0.0.1
  */
 public class CuratorFactory {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(CuratorFactory.class);
+	
 	public static CuratorFramework getCurator(RegisterCenterConfig centerConfig){
+		
+		logger.info("connect zookeeper host list = "+centerConfig.getServersList());
+		
 		Builder bulider = CuratorFrameworkFactory.builder()
 									             .connectString(centerConfig.getServersList())
-									             .namespace(centerConfig.getNameSpace())
 									             .retryPolicy(new ExponentialBackoffRetry(centerConfig.getBaseSleepTimeMilliseconds(), centerConfig.getMaxRetries(), centerConfig.getMaxSleepTimeMilliseconds()));
 		if (0 != centerConfig.getSessionTimeoutMilliseconds()) {
 			bulider.sessionTimeoutMs(centerConfig.getSessionTimeoutMilliseconds());

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.lteam.job.common.version.VersionConfig;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
+import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
 import com.lteam.job.core.config.version.VersionNode;
 import com.lteam.job.core.listener.VersionIterationListener;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
@@ -25,8 +26,7 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 	
 	private static CuratorFramework cilent = null ; 
 	
-	@Autowired
-	private static IZookeeperCilentApi zkApi;
+	private static IZookeeperCilentApi zkApi = new CuratorKeeperApiImpl();
 	
 	static {
 		if(cilent == null){

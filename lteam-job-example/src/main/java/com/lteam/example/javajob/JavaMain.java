@@ -2,6 +2,7 @@ package com.lteam.example.javajob;
 
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.zkServer.factory.config.RegisterCenterConfig;
+import com.lteam.job.core.register.impl.ZkRegisterCenter;
 
 /**
  * @Description:
@@ -16,11 +17,16 @@ public class JavaMain {
     	JobConfig job = getJob();
     	//获取连接zookeeper信息
     	RegisterCenterConfig centerConfig = getZkConfig();
-    	
+    	//获取注册中心
+    	ZkRegisterCenter zkcenter = getRegisterCenter();
+    	zkcenter.setCenterConfig(centerConfig);
+    	zkcenter.setJobConfig(job);
+    	//注册信息
+    	zkcenter.inital();
 	}
     
     private static JobConfig getJob(){
-    	JobConfig job = new JobConfig().builer("simpleJob", "0 0/30 * * * ?")
+    	JobConfig job = new JobConfig().builer("simpleJob", "1 0/30 * * * ?")
 				        .addJobMaster("hgc")
 				        .addMasterEmail("862896568@qq.com")
 				        .addJobSliceStrategy("A=1;B=2;C=3")
@@ -39,5 +45,10 @@ public class JavaMain {
     	centerConfig.setSessionTimeoutMilliseconds(1000);
     	centerConfig.setMaxSleepTimeMilliseconds(3000);
     	return centerConfig;
+    }
+    
+    private static ZkRegisterCenter getRegisterCenter(){
+    	ZkRegisterCenter zkcenter = new ZkRegisterCenter();
+    	return zkcenter;
     }
 }

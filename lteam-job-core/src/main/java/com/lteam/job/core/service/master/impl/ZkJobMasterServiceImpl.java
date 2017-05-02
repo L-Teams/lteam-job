@@ -12,6 +12,7 @@ import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
+import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
 import com.lteam.job.core.config.master.MasterNode;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.master.IJobMasterService;
@@ -29,7 +30,7 @@ public class ZkJobMasterServiceImpl implements IJobMasterService{
 	
 	private static CuratorFramework cilent = null ;
 	
-	private static IZookeeperCilentApi zkApi;
+	private static IZookeeperCilentApi zkApi = new CuratorKeeperApiImpl();
 	
 	static {
 		if(cilent == null){
