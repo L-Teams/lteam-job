@@ -2,14 +2,12 @@ package com.lteam.job.core.service.config.impl;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
 import com.lteam.job.core.config.config.ConfigNode;
-import com.lteam.job.core.listener.manager.DestoryJobListener;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.config.IJobConfigService;
 import com.lteam.job.core.service.master.IJobMasterService;
@@ -62,13 +60,13 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 	//TODO -> Exception 自定义处理
 	public void destoryJobInfo(){
 		try {
-			JobStatus status = jobMasterService.addMasterConfigInfo(configNode.getJobInfo())
-			              					   .getJobExecuteStatus();
-			if(status == JobStatus.RUN){
-				zkApi.addNodeListener(NodePath.getJobExecuteStatus(configNode.getJobInfo()), true, new DestoryJobListener());
-				return ;
-			}
-			zkApi.deleteNodeIncludeLeafNode(NodePath.getJobPath(configNode.getJobInfo()));
+//			JobStatus status = jobMasterService.addMasterConfigInfo(configNode.getJobInfo())
+//			              					   .getJobExecuteStatus();
+//			if(status == JobStatus.RUN){
+//				zkApi.addNodeListener(NodePath.getJobExecuteStatus(configNode.getJobInfo()), true, new DestoryJobListener());
+//				return ;
+//			}
+//			zkApi.deleteNodeIncludeLeafNode(NodePath.getJobPath(configNode.getJobInfo()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

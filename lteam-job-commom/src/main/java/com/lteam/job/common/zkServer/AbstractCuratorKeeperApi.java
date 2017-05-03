@@ -6,6 +6,7 @@ import org.apache.zookeeper.data.Stat;
 
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.zkServer.listener.AbstractZkListener;
+import com.lteam.job.common.zkServer.listener.AbstractZkNodeListener;
 
 /**
  * @Description:基于Curator实现abstract api
@@ -89,5 +90,6 @@ public abstract class AbstractCuratorKeeperApi implements IZookeeperCilentApi{
 
 	public void addNodeListener(String path, boolean dataIsCompressed, AbstractZkListener listener) throws Exception {
 		
+		listener.setCache(cilent, path);
 	}
 }
