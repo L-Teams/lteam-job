@@ -9,7 +9,7 @@ import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
 import com.lteam.job.core.config.config.ConfigNode;
-import com.lteam.job.core.listener.DestoryJobListener;
+import com.lteam.job.core.listener.manager.node.impl.DestoryJobListener;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.config.IJobConfigService;
 import com.lteam.job.core.service.master.IJobMasterService;

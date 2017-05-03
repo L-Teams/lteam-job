@@ -1,6 +1,8 @@
 package com.lteam.job.core.service.version;
 import java.util.List;
+
 import com.lteam.job.common.version.VersionConfig;
+import com.lteam.job.core.config.version.VersionNode;
 /**
  * @Description:版本信息管理接口
  * @author guicheng.huang
@@ -33,7 +35,7 @@ public interface IJobVersionService {
 	 * 功能:添加版本信息
 	 * @param versionConfig
 	 */
-	public void addVersionInfo(VersionConfig versionConfig);
+	public IJobVersionService addVersionInfo(VersionNode versionNode);
 	
 	/**
 	 * 功能:删除版本信息

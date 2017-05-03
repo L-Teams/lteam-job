@@ -8,6 +8,7 @@ import com.lteam.job.common.zkServer.factory.CuratorFactory;
 import com.lteam.job.common.zkServer.factory.config.RegisterCenterConfig;
 import com.lteam.job.core.config.config.ConfigNode;
 import com.lteam.job.core.config.server.ServersNode;
+import com.lteam.job.core.config.version.VersionNode;
 
 /**
  * @Description:基于zookeeper注册中心实现
@@ -121,7 +122,7 @@ public class ZkRegisterCenter extends RegisterCenter{
 	 * 逻辑:
 	 */
 	public void registerVersionConfigInfo(){
-		
+		new VersionNode().addVersionInfo(jobConfig).storeVersionInfo();
 	}
 
 }

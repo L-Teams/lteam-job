@@ -5,6 +5,8 @@ import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.common.version.VersionConfig;
+import com.lteam.job.core.service.version.IJobVersionService;
+import com.lteam.job.core.service.version.impl.ZkJobVersionServiceImpl;
 
 /**
  * @Description:版本节点
@@ -14,11 +16,16 @@ import com.lteam.job.common.version.VersionConfig;
  */
 public class VersionNode extends Node{
 	
+	private IJobVersionService jobVersionService = new ZkJobVersionServiceImpl();
+	
 	//历史版本路径
 	private String versionHistoryPath;
 	
 	//历史版本内容
 	private String versionHistoryContent;
+	
+	//版本信息配置
+	private VersionConfig verSionConfig;
 	
 	public VersionNode(){
 		nodeType = NodeType.VERSIONNODE;
@@ -26,7 +33,7 @@ public class VersionNode extends Node{
 	}
 	
 	public VersionNode addVersionInfo(JobConfig jobConfig){
-		VersionConfig verSionConfig = new VersionConfig().addJobConfig(jobConfig);
+		verSionConfig = new VersionConfig().addJobConfig(jobConfig);
 		nodePath = NodePath.getVersionPath(jobConfig);
 		nodeContent = String.valueOf(jobConfig.getMaxVersionNumber());
 		versionHistoryPath = NodePath.getVersionPath(jobConfig) +"/"+ verSionConfig.getVersion();
@@ -39,7 +46,8 @@ public class VersionNode extends Node{
 	 * 逻辑:
 	 */
 	public void storeVersionInfo(){
-		
+		jobVersionService.addVersionInfo(getVersionInfo())
+		                 .handleVersionInfo();
 	}
 	
 
@@ -61,4 +69,11 @@ public class VersionNode extends Node{
 		this.versionHistoryContent = versionHistoryContent;
 	}
 
+	public VersionNode getVersionInfo(){
+		return this;
+	}
+	
+	public VersionConfig getVersionConfig(){
+		return this.verSionConfig;
+	}
 }
