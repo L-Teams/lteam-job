@@ -8,7 +8,7 @@ import com.lteam.job.common.version.VersionConfig;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
 import com.lteam.job.core.config.version.VersionNode;
-import com.lteam.job.core.listener.manager.node.impl.VersionIterationListener;
+import com.lteam.job.core.listener.VersionIterationListener;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.version.IJobVersionService;
 

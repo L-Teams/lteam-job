@@ -1,10 +1,8 @@
 package com.lteam.job.common.zkServer;
-
-import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
-
 import com.lteam.job.common.config.Node;
+import com.lteam.job.common.zkServer.listener.AbstractZkListener;
 
 /**
  * @Description:zookeeper操作封装接口
@@ -112,6 +110,6 @@ public interface IZookeeperCilentApi {
 	 * @param path
 	 * @throws Exception 
 	 */
-	public void addNodeListener(String path, boolean dataIsCompressed, NodeCacheListener listener) throws Exception;
+	public void addNodeListener(String path, boolean dataIsCompressed, AbstractZkListener listener) throws Exception;
 	
 }

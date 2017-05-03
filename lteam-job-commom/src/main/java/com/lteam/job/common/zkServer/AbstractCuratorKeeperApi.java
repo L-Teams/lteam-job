@@ -1,12 +1,11 @@
 package com.lteam.job.common.zkServer;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.ProtectACLCreateModePathAndBytesable;
-import org.apache.curator.framework.recipes.cache.NodeCache;
-import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 
 import com.lteam.job.common.config.Node;
+import com.lteam.job.common.zkServer.listener.AbstractZkListener;
 
 /**
  * @Description:基于Curator实现abstract api
@@ -88,10 +87,7 @@ public abstract class AbstractCuratorKeeperApi implements IZookeeperCilentApi{
 		cilent = (CuratorFramework) t;
 	}	
 
-	public void addNodeListener(String path, boolean dataIsCompressed, NodeCacheListener listener) throws Exception{
-		final NodeCache cache = new NodeCache(cilent, path, dataIsCompressed);
-		cache.start(true);
-		cache.getListenable().addListener(listener);
-		cache.close();
+	public void addNodeListener(String path, boolean dataIsCompressed, AbstractZkListener listener) throws Exception {
+		
 	}
 }
