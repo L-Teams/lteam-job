@@ -89,7 +89,6 @@ public abstract class AbstractCuratorKeeperApi implements IZookeeperCilentApi{
 	}	
 
 	public void addNodeListener(String path, boolean dataIsCompressed, AbstractZkListener listener) throws Exception {
-		
-		listener.setCache(cilent, path);
+		listener.setCache(cilent, path, dataIsCompressed).addListener().start();
 	}
 }
