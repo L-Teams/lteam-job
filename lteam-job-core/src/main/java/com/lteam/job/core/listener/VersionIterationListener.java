@@ -12,7 +12,8 @@ public class VersionIterationListener extends AbstractZkNodeListener {
 	
 	public void nodeChanged() throws Exception {
 	
-		System.out.println(super.cache.getCurrentData().getData());
+		System.out.println(new String(super.cache.getCurrentData().getData()));
+		
 	}
 
 }
