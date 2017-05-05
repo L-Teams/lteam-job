@@ -1,10 +1,11 @@
 package com.lteam.job.core.config.server;
-
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
 import com.lteam.job.common.server.ServerConfig;
 import com.lteam.job.common.server.ServerInfoType;
+import com.lteam.job.core.service.server.IJobServerService;
+import com.lteam.job.core.service.server.impl.ZkJobServerServiceImpl;
 
 /**
  * @Description:服务节点
@@ -14,6 +15,8 @@ import com.lteam.job.common.server.ServerInfoType;
  */
 public class ServersNode extends Node{
 
+    private IJobServerService jobServerService = new ZkJobServerServiceImpl();
+	
 	//本机服务节点路径
 	private String hostServerPath;
 	
@@ -52,7 +55,7 @@ public class ServersNode extends Node{
 	 * 功能:停止服务器
 	 * 逻辑:
 	 */
-	private void stopServer(){
+	public void stopServer(){
 		
 	}
 	
@@ -60,7 +63,7 @@ public class ServersNode extends Node{
 	 * 功能:启动服务器
 	 * 逻辑:
 	 */
-	private void runServer(){
+	public void runServer(){
 		
 	}
 	
@@ -68,7 +71,7 @@ public class ServersNode extends Node{
 	 * 功能:销毁服务器
 	 * 逻辑:
 	 */
-	private void destoryServer(){
+	public void destoryServer(){
 		
 	}
 	
@@ -76,7 +79,7 @@ public class ServersNode extends Node{
 	 * 功能:获取服务器信息
 	 * 逻辑:
 	 */
-	private void getServerInfo(ServerInfoType infoType){
+	public void getServerInfo(ServerInfoType infoType){
 		
 	}
 	
@@ -84,7 +87,7 @@ public class ServersNode extends Node{
 	 * 功能:获取主服务器信息
 	 * 逻辑:
 	 */
-	private void getMasterInfo(){
+	public void getMasterInfo(){
 		
 	}
 }
