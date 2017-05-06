@@ -25,9 +25,16 @@ public interface IJobServerService {
 	public void handleServerInfo();
 	
 	/**
-	 * 功能:
+	 * 功能:处理服务器状态
+	 * 逻辑:
 	 */
 	public void handleServerStatus();
+	
+	/**
+	 * 功能:处理服务器执行结果
+	 * 逻辑:
+	 */
+	public void handleServerResult();
 	
 	/**
 	 * 功能:销毁服务器信息
@@ -43,8 +50,14 @@ public interface IJobServerService {
 	
 	/**
 	 * 功能:暂停服务
+	 * 逻辑:
 	 */
 	public void stopServerInfo();
 	
+	/**
+	 * 功能:服务器重新等待状态
+	 * 逻辑:
+	 */
+	public void readyServerInfo();
 	
 }

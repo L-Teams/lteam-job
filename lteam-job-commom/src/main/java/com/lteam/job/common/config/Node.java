@@ -19,6 +19,13 @@ public class Node {
 	//节点内容
 	protected String nodeContent;
 
+	public Node(){}
+	
+	public Node(String nodePath, String nodeContent){
+		this.nodePath = nodePath;
+		this.nodeContent = nodeContent;
+	}
+	
 	public String getNodePath() {
 		return nodePath;
 	}

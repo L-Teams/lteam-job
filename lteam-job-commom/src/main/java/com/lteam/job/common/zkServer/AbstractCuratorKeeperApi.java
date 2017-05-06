@@ -6,7 +6,6 @@ import org.apache.zookeeper.data.Stat;
 
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.zkServer.listener.AbstractZkListener;
-import com.lteam.job.common.zkServer.listener.AbstractZkNodeListener;
 
 /**
  * @Description:基于Curator实现abstract api
@@ -40,6 +39,16 @@ public abstract class AbstractCuratorKeeperApi implements IZookeeperCilentApi{
 		return false ;
 	}
 
+	public void createNode(String path, CreateMode mode)throws Exception {
+		ProtectACLCreateModePathAndBytesable<String> createModeal = 
+			    cilent.create()
+			          .creatingParentsIfNeeded();
+		if(mode != null){
+			createModeal.withMode(mode);
+		}
+		createModeal.forPath(path);
+	}
+	
 	public void createNode(String path, String data, CreateMode mode) throws Exception {
 		ProtectACLCreateModePathAndBytesable<String> createModeal = 
 		    cilent.create()

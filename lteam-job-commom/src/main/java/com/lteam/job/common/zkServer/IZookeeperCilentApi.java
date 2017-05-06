@@ -1,6 +1,7 @@
 package com.lteam.job.common.zkServer;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
+
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.zkServer.listener.AbstractZkListener;
 
@@ -19,6 +20,22 @@ public interface IZookeeperCilentApi {
 	 * @throws Exception 
 	 */
 	public boolean isExistPath(String path) throws Exception;
+	
+	/**
+	 * 功能:创建节点
+	 * @param path
+	 * @param mode
+	 * @throws Exception
+	 */
+	public void createNode(String path, CreateMode mode) throws Exception;
+	/**
+	 * 功能:创建节点
+	 * @param path
+	 * @param data
+	 * @param mode
+	 * @throws Exception
+	 */
+	public void createNode(String path, String data, CreateMode mode) throws Exception;
 	
 	/**
 	 * 功能:创建节点
