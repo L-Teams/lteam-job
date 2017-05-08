@@ -1,13 +1,10 @@
 package com.lteam.job.core.config.master;
-
 import com.lteam.job.common.config.Config;
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
-import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.common.util.GsonUtil;
-import com.lteam.job.core.config.server.ServersNode;
 
 /**
  * @Description:主节点

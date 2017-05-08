@@ -1,6 +1,7 @@
 package com.lteam.job.common.server;
 
 import com.lteam.job.common.config.Config;
+import com.lteam.job.common.util.ServerIpFacory;
 
 /**
  * @Description:服务器配置信息
@@ -10,7 +11,7 @@ import com.lteam.job.common.config.Config;
  */
 public class ServerConfig extends Config{
 
-	private String hostIp = ""; //提供静态方法获取本机ip;
+	private String hostIp = ServerIpFacory.getIp(); //提供静态方法获取本机ip;
 	
 	private String post = ""; //提供静态方法获取本机服务的端口;
 	
@@ -25,7 +26,7 @@ public class ServerConfig extends Config{
 	}
 	
 	public String getHostName(){
-		String hostName = hostIp+":"+post;//问题?可能为处理post  ->TODO
+		String hostName = hostIp;
 		return hostName;
 	}
 	

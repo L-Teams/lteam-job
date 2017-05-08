@@ -47,9 +47,11 @@ public class ZkJobServerServiceImpl implements IJobServerService{
 	public void handleServerInfo() {
 	    try {
 			if(!zkApi.isExistPath(serversNode.getNodePath())){
-				zkApi.createNode(serversNode);
+				zkApi.createNode(serversNode.getNodePath(),CreateMode.PERSISTENT);
 			}
+			//处理服务器状态
 			handleServerStatus();
+			//处理服务器执行结果
 			handleServerResult();
 		} catch (Exception e) {
 			e.printStackTrace();
