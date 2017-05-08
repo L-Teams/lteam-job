@@ -22,7 +22,7 @@ public class ZkRegisterCenter extends RegisterCenter{
 	private static final Logger logger = LoggerFactory.getLogger(ZkRegisterCenter.class);
 	 
 	//注册中心配置
-	private RegisterCenterConfig centerConfig;
+	private static RegisterCenterConfig centerConfig;
 	
 	//任务配置信息
 	private JobConfig jobConfig;
@@ -39,21 +39,16 @@ public class ZkRegisterCenter extends RegisterCenter{
 	}
 
 	public static CuratorFramework getCilent() {
+		if(cilent == null){
+			cilent = CuratorFactory.getCurator(centerConfig);
+			cilent.start();
+		}
 		return cilent;
-	}
-
-	public RegisterCenterConfig getCenterConfig() {
-		return centerConfig;
-	}
-
-	public void setCenterConfig(RegisterCenterConfig centerConfig) {
-		this.centerConfig = centerConfig;
 	}
 
 	public void inital() {
 		//获取连接对象
-		cilent = CuratorFactory.getCurator(centerConfig);
-		cilent.start();
+		cilent = getCilent();
 		//注册信息
 		addRegisterInfo();
 	}
