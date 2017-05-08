@@ -19,6 +19,13 @@ public interface IJobVersionService {
 	public List<VersionConfig> getJobVersionList();
 	
 	/**
+	 * 功能:版本的数量
+	 * 逻辑:
+	 * @return
+	 */
+	public int getJobVersionNum();
+	
+	/**
 	 * 功能:获取当前版本信息
 	 * @return 当前版本
 	 */

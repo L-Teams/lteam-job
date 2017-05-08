@@ -59,4 +59,10 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 
 	}
 
+	@Override
+	public int getJobVersionNum() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

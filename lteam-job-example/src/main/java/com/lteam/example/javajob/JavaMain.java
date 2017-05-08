@@ -19,7 +19,7 @@ public class JavaMain {
     	RegisterCenterConfig centerConfig = getZkConfig();
     	//获取注册中心
     	ZkRegisterCenter zkcenter = getRegisterCenter();
-    	zkcenter.setCenterConfig(centerConfig);
+    	//zkcenter.setCenterConfig(centerConfig);
     	zkcenter.setJobConfig(job);
     	//注册信息
     	zkcenter.inital();

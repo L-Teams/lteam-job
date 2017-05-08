@@ -27,8 +27,8 @@ public class ZkRegisterCenter extends RegisterCenter{
 	//任务配置信息
 	private JobConfig jobConfig;
 	
+	//注册中心连接对象
 	private static CuratorFramework cilent;
-	
 	
 	public JobConfig getJobConfig() {
 		return jobConfig;
@@ -38,6 +38,10 @@ public class ZkRegisterCenter extends RegisterCenter{
 		this.jobConfig = jobConfig;
 	}
 
+	public static void setCilent(CuratorFramework cilent) {
+		ZkRegisterCenter.cilent = cilent;
+	}
+	
 	public static CuratorFramework getCilent() {
 		if(cilent == null){
 			cilent = CuratorFactory.getCurator(centerConfig);
@@ -46,6 +50,18 @@ public class ZkRegisterCenter extends RegisterCenter{
 		return cilent;
 	}
 
+	public static RegisterCenterConfig getCenterConfig() {
+		return centerConfig;
+	}
+
+	public static void setCenterConfig(RegisterCenterConfig centerConfig) {
+		ZkRegisterCenter.centerConfig = centerConfig;
+	}
+
+	/**
+	 * 功能:
+	 * 逻辑:初始化
+	 */
 	public void inital() {
 		//获取连接对象
 		cilent = getCilent();
@@ -61,7 +77,6 @@ public class ZkRegisterCenter extends RegisterCenter{
 	public void addRegisterInfo() {
 		registerJobConfigInfo();
 		registerServerConfigInfo();
-		registerSilenceJobConfigInfo();
 		registerSilenceJobConfigInfo();
 		registerMasterConfigInfo();
 		registerExecuterConfigInfo();

@@ -1,5 +1,10 @@
 package com.lteam.job.core.listener;
+import com.lteam.job.common.job.JobConfig;
+import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.common.zkServer.listener.AbstractZkNodeListener;
+import com.lteam.job.core.config.version.VersionNode;
+import com.lteam.job.core.service.version.IJobVersionService;
+import com.lteam.job.core.service.version.impl.ZkJobVersionServiceImpl;
 /**
  * @Description:版本迭代监听
  *             :job配置信息修改时触发
@@ -9,10 +14,14 @@ import com.lteam.job.common.zkServer.listener.AbstractZkNodeListener;
  */
 public class VersionIterationListener extends AbstractZkNodeListener {
 
+	IJobVersionService jobVersionService = new ZkJobVersionServiceImpl();
 	
 	public void nodeChanged() throws Exception {
-	
-		System.out.println(new String(super.cache.getCurrentData().getData()));
+		JobConfig jobConfig = GsonUtil.gsonToBean(new String(super.cache.getCurrentData().getData()), JobConfig.class);
+		int versionNum = jobVersionService.addVersionInfo(new VersionNode().addVersionInfo(jobConfig)).getJobVersionNum();
+		if(versionNum >= jobConfig.getMaxVersionNumber()){
+			
+		}
 		
 	}
 
