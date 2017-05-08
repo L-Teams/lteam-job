@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.curator.framework.CuratorFramework;
 
 import com.lteam.job.common.config.NodePath;
+import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.version.VersionConfig;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
@@ -55,14 +56,20 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 	    return this;
 	}
 
-	public void destoryVersionInfo(int version) {
+	public void destoryVersionInfo(String version) {
 
 	}
 
-	@Override
 	public int getJobVersionNum() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public VersionConfig getBestOldVersion() {
+		return null;
+	}
+
+	public void storeVersionInfo(JobConfig jobConfig) {
+		
 	}
 
 }
