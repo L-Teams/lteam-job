@@ -19,12 +19,7 @@ public class VersionIterationListener extends AbstractZkNodeListener {
 	
 	public void nodeChanged() throws Exception {
 		JobConfig jobConfig = GsonUtil.gsonToBean(new String(super.cache.getCurrentData().getData()), JobConfig.class);
-		int versionNum = jobVersionService.addVersionInfo(new VersionNode().addVersionInfo(jobConfig)).getJobVersionNum();
-		if( versionNum >= jobConfig.getMaxVersionNumber()){
-			VersionConfig versionConfig = jobVersionService.addVersionInfo(new VersionNode().addVersionInfo(jobConfig)).getBestOldVersion();
-			jobVersionService.destoryVersionInfo(versionConfig.getVersion());
-		}
-		jobVersionService.storeVersionInfo(jobConfig);
+		jobVersionService.addVersionInfo(new VersionNode().addVersionInfo(jobConfig)).storeVersionInfo();
 	}
 
 }

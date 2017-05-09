@@ -2,6 +2,7 @@ package com.lteam.job.common.config;
 
 import com.lteam.job.common.execute.ExecuteConfig;
 import com.lteam.job.common.server.ServerConfig;
+import com.lteam.job.common.version.VersionConfig;
 
 /**
  * @Description:lteam-job服务zookeeper节点路径
@@ -63,7 +64,9 @@ public class NodePath {
 	
 	static final String VERSIONNODENAME = "versionnode";
 	
-	static final String VERSIONPATH = ROOT+"/%s/%s/"+VERSIONNODENAME;;
+	static final String VERSIONPATH = ROOT+"/%s/%s/"+VERSIONNODENAME;
+	
+	static final String HISTORYVERSIONPATH = VERSIONPATH +"/%s";
 	
 	public static String getJobPath(Config config){
 		return String.format(JOBPATH, config.getSystemName(), config.getJobName());
@@ -120,4 +123,9 @@ public class NodePath {
 	public static String getVersionPath(Config config){
 		return String.format(VERSIONPATH, config.getSystemName(), config.getJobName());
 	}
+	
+	public static String getHistoryVersionPath(VersionConfig config){
+		return String.format(HISTORYVERSIONPATH, config.getSystemName(), config.getJobName(), config.getVersion());
+	}
+	
 }

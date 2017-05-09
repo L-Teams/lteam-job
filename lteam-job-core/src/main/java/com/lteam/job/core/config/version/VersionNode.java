@@ -35,7 +35,7 @@ public class VersionNode extends Node{
 	public VersionNode addVersionInfo(JobConfig jobConfig){
 		verSionConfig = new VersionConfig().addJobConfig(jobConfig);
 		nodePath = NodePath.getVersionPath(jobConfig);
-		nodeContent = String.valueOf(jobConfig.getMaxVersionNumber());
+		nodeContent = verSionConfig.getVersion();
 		versionHistoryPath = NodePath.getVersionPath(jobConfig) +"/"+ verSionConfig.getVersion();
 		versionHistoryContent = GsonUtil.gsonString(verSionConfig);
 		return this;

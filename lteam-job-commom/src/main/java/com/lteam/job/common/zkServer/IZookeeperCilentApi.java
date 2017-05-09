@@ -1,4 +1,6 @@
 package com.lteam.job.common.zkServer;
+import java.util.List;
+
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 
@@ -121,6 +123,15 @@ public interface IZookeeperCilentApi {
 	 * @param t : 兼容其他连接对象->后期可能兼容mysql实现
 	 */
 	public <T> void setCientObject(T t);
+	
+	/**
+	 * 功能:获取路径的子节点
+	 * @param path
+	 * @return
+	 * @throws Exception 
+	 */
+	public List<Node> getChildrenList(String path) throws Exception;
+	
 	
 	/**
 	 * 功能:给节点添加监听器

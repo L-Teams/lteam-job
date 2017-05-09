@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.version.VersionConfig;
+import com.lteam.job.common.version.VersionStatus;
 import com.lteam.job.core.config.version.VersionNode;
 /**
  * @Description:版本信息管理接口
@@ -14,20 +15,29 @@ public interface IJobVersionService {
 
 	/**
 	 * 功能:获取job版本列表
-	 * 逻辑:
+	 * 逻辑:遍历versionnode节点下所有子结点,并转换为相关对象
 	 * @return 版本列表
 	 */
 	public List<VersionConfig> getJobVersionList();
 	
 	/**
-	 * 功能:版本的数量
-	 * 逻辑:
+	 * 功能:获取某一版本的信息
+	 * @param version
 	 * @return
 	 */
-	public int getJobVersionNum();
+	public VersionConfig getJobVersion(String version);
+	
+	/**
+	 * 功能:版本的数量
+	 * 逻辑:获取versionnode节点下子结点数量
+	 * @return
+	 */
+	public Integer getJobVersionNum();
 	
 	/**
 	 * 功能:获取当前版本信息
+	 * 逻辑:1.获取versionnode下当前版本内容
+	 *     2.查询该版本的内容并转换成对象
 	 * @return 当前版本
 	 */
 	public VersionConfig getCurrentVersion();
@@ -48,15 +58,25 @@ public interface IJobVersionService {
 	
 	/**
 	 * 功能:添加版本信息
+	 * 逻辑:给server添加处理节点,注:server基于节点来处理
 	 * @param versionConfig
 	 */
 	public IJobVersionService addVersionInfo(VersionNode versionNode);
 	
 	/**
 	 * 功能:存储版本信息
+	 * 逻辑:1.判断versionnode存在?如果不存在则新增,存在则修改节点内容为新的版本号
+	 *     2.判断zookeeper中版本列表的数量,与job config数量对比,如果超出指定数量则删除最老版本。
+	 *     3.新增版本节点
 	 * @param versionNode
 	 */
-	public void storeVersionInfo(JobConfig jobConfig);
+	public void storeVersionInfo();
+	
+	/**
+	 * 功能:删除最老的版本
+	 * 逻辑:
+	 */
+	public void destoryBestOldVersionInfo();
 	
 	/**
 	 * 功能:删除版本信息

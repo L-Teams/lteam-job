@@ -2,6 +2,7 @@ package com.lteam.job.common.version;
 
 import java.util.Date;
 
+import com.lteam.job.common.config.Config;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.version.factory.VersionNumFactory;
 
@@ -11,7 +12,7 @@ import com.lteam.job.common.version.factory.VersionNumFactory;
  * @date: 2017年4月27日 下午2:04:45
  * @version V0.0.1
  */
-public class VersionConfig {
+public class VersionConfig extends Config{
 	
 	//版本号
 	private String version = VersionNumFactory.creatVersionNum();

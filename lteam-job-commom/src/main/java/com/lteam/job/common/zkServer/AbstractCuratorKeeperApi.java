@@ -1,4 +1,7 @@
 package com.lteam.job.common.zkServer;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.ProtectACLCreateModePathAndBytesable;
 import org.apache.zookeeper.CreateMode;
@@ -91,6 +94,14 @@ public abstract class AbstractCuratorKeeperApi implements IZookeeperCilentApi{
 			return true;
 		}
 		return false;
+	}
+	
+	public List<Node> getChildrenList(String path) throws Exception{
+		List<Node> list = new ArrayList<>();
+		for (String chPath : cilent.getChildren().forPath(path)) {
+			list.add(new Node(chPath, getNodeData(chPath)));
+		}
+		return list;
 	}
 	
 	public <T> void setCientObject(T t) {
