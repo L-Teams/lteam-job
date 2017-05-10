@@ -1,7 +1,6 @@
 package com.lteam.job.core.listener;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.util.GsonUtil;
-import com.lteam.job.common.version.VersionConfig;
 import com.lteam.job.common.zkServer.listener.AbstractZkNodeListener;
 import com.lteam.job.core.config.version.VersionNode;
 import com.lteam.job.core.service.version.IJobVersionService;

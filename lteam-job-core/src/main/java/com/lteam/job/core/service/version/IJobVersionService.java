@@ -40,6 +40,20 @@ public interface IJobVersionService {
 	public VersionConfig getCurrentVersion();
 	
 	/**
+	 * 功能:设置某一版本为当前版本
+	 * 逻辑:
+	 * @param version
+	 */
+	public void setCurrentVersion(String version);
+	
+	/**
+	 * 功能:修改某一版本
+	 * 逻辑:
+	 * @param config
+	 */
+	public void updataVersion(VersionConfig config);
+	
+	/**
 	 * 功能:获取最老版本的信息
 	 * 逻辑:
 	 * @return 最老版本
@@ -79,6 +93,7 @@ public interface IJobVersionService {
 	 * 功能:删除版本信息
 	 * 逻辑:1.判断是否为当前版本,如果为当前版本不可做删除
 	 *     2.如果不是当前版本则可做删除
+	 *     TODO ->删除/修改 做权限验证
 	 * @param version
 	 */
 	public void destoryVersionInfo(String version);

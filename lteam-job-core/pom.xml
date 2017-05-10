@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.lteam</groupId>
     <artifactId>lteam-job</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>lteam-job-core</artifactId>
@@ -18,7 +18,7 @@
     <dependency>  
        <groupId>com.lteam</groupId>  
        <artifactId>lteam-job-commom</artifactId>  
-       <version>0.0.3-SNAPSHOT</version>  
+       <version>0.0.4-SNAPSHOT</version>  
     </dependency>
     <!-- zookeeper 客户端  -->
     <dependency>  

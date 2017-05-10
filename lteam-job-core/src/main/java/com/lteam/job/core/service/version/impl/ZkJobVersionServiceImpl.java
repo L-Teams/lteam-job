@@ -90,10 +90,20 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 		return getJobVersion(version);
 	}
 
+	public void setCurrentVersion(String version){
+		
+	}
+
+	public void updataVersion(VersionConfig config){
+		
+	}
+	
 	public void handleVersionInfo() {
 		try {
-			String configPath = NodePath.getConfigPath(versionNode.getVersionConfig().getJobConfig());
-			zkApi.addNodeListener(configPath, true, new VersionIterationListener());
+			//处理初版信息
+			storeVersionInfo();
+			//添加监听
+			zkApi.addNodeListener(NodePath.getConfigPath(versionNode.getVersionConfig().getJobConfig()), true, new VersionIterationListener());
 		} catch (Exception e) {
 			logger.error("lteam-job >> handleVersionInfo exception error="+e);
 		}
@@ -116,14 +126,15 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 
 			@Override
 			public int compare(VersionConfig o1, VersionConfig o2) {
-				if(o1.getUpdataDate().compareTo(o2.getUpdataDate())>0){
-					return 1;
+				if(o1.getUpdataDate() != null && o2.getUpdataDate() != null){
+					if(o1.getUpdataDate().compareTo(o2.getUpdataDate())<=0){
+						return 1;
+					}
 				}
 				return 0;
 			}
 		});
-		
-		return null;
+		return versionList!=null?versionList.get(0):null;
 	}
 	
 	public void destoryBestOldVersionInfo(){
@@ -144,8 +155,8 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 			//更新版本列表
 			versionNode.getVersionConfig().setCreateDate(new Date());
 			zkApi.createNode(new Node(versionNode.getVersionHistoryPath(), versionNode.getVersionHistoryContent()), CreateMode.PERSISTENT);
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			logger.error("lteam-job >> storeVersionInfo exception error="+e);
 		}
 	}
 }
