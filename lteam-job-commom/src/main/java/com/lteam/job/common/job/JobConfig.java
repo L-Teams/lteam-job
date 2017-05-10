@@ -9,17 +9,6 @@ import com.lteam.job.common.config.Config;
  * @version V0.0.1
  */
 public class JobConfig extends Config{
-	
-	@Override
-	public String toString() {
-		return "JobConfig [jobCron=" + jobCron + ", jobDescripte="
-				+ jobDescripte + ", jobMaster=" + jobMaster + ", masterEmail="
-				+ masterEmail + ", jobSliceNum=" + jobSliceNum
-				+ ", jobSliceStrategy=" + jobSliceStrategy
-				+ ", childrenJobName=" + childrenJobName + ", executeRule="
-				+ executeRule + ", jonStatus=" + jonStatus
-				+ ", maxVersionNumber=" + maxVersionNumber + "]";
-	}
 
 	private String jobCron;
 	
@@ -177,5 +166,16 @@ public class JobConfig extends Config{
 
 	public void setExecuteRule(String executeRule) {
 		this.executeRule = executeRule;
+	}
+	
+	@Override
+	public String toString() {
+		return "JobConfig [jobCron=" + jobCron + ", jobDescripte="
+				+ jobDescripte + ", jobMaster=" + jobMaster + ", masterEmail="
+				+ masterEmail + ", jobSliceNum=" + jobSliceNum
+				+ ", jobSliceStrategy=" + jobSliceStrategy
+				+ ", childrenJobName=" + childrenJobName + ", executeRule="
+				+ executeRule + ", jonStatus=" + jonStatus
+				+ ", maxVersionNumber=" + maxVersionNumber + "]";
 	}
 }

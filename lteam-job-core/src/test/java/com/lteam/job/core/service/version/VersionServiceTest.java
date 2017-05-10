@@ -66,9 +66,9 @@ public class VersionServiceTest {
 //		logger.info("删除版本成功");
 //	}
 	
-	@Test
-	public void destoryBestOldVersionInfo(){
-		service.addVersionInfo(new VersionNode().addVersionInfo(JobCommon.getJobConfig())).destoryBestOldVersionInfo();
-		logger.info("删除最老版本成功");
-	}
+//	@Test
+//	public void destoryBestOldVersionInfo(){
+//		service.addVersionInfo(new VersionNode().addVersionInfo(JobCommon.getJobConfig())).destoryBestOldVersionInfo();
+//		logger.info("删除最老版本成功");
+//	}
 }
