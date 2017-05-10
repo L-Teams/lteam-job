@@ -178,4 +178,5 @@ public class JobConfig extends Config{
 				+ executeRule + ", jonStatus=" + jonStatus
 				+ ", maxVersionNumber=" + maxVersionNumber + "]";
 	}
+	
 }

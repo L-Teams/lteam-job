@@ -150,7 +150,7 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 			//处理版本内容变更,未变更则不做处理
 			List<VersionConfig> historyVersion = getJobVersionList();
 			for (VersionConfig config : historyVersion) {
-				if(versionNode.getVersionConfig().getJobConfig() != null && versionNode.getVersionConfig().getJobConfig()==config.getJobConfig()){
+				if(versionNode.getVersionConfig().getJobConfig() != null && GsonUtil.gsonString(versionNode.getVersionConfig().getJobConfig()).equals(GsonUtil.gsonString(config.getJobConfig()))){
 					return ;
 				}
 			}
