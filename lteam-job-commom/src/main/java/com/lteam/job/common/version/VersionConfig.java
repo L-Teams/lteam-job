@@ -23,8 +23,20 @@ public class VersionConfig extends Config{
 	//版本状态,默认当前应用版本
 	private VersionStatus verStatus = VersionStatus.NOW;
      
-	//版本创建日期,默认当前日期
+	//版本创建日期
 	private Date createDate = new Date();
+	
+	//版本修改日期,默认当前日期
+	private Date updataDate = new Date();
+	
+	public VersionConfig(){}
+	
+	public VersionConfig addJobConfig(JobConfig jobConfig){
+		super.systemName = jobConfig.getSystemName();
+		super.jobName = jobConfig.getJobName();
+		this.jobConfig = jobConfig;
+		return this;
+	}
 	
 	public Date getCreateDate() {
 		return createDate;
@@ -34,11 +46,12 @@ public class VersionConfig extends Config{
 		this.createDate = createDate;
 	}
 
-	public VersionConfig(){}
-	
-	public VersionConfig addJobConfig(JobConfig jobConfig){
-		this.jobConfig = jobConfig;
-		return this;
+	public Date getUpdataDate() {
+		return updataDate;
+	}
+
+	public void setUpdataDate(Date updataDate) {
+		this.updataDate = updataDate;
 	}
 	
 	public String getVersion() {
@@ -64,4 +77,12 @@ public class VersionConfig extends Config{
 	public void setVerStatus(VersionStatus verStatus) {
 		this.verStatus = verStatus;
 	}	
+	
+	@Override
+	public String toString() {
+		return "VersionConfig [version=" + version + ", jobConfig=" + jobConfig
+				+ ", verStatus=" + verStatus + ", createDate=" + createDate
+				+ "]";
+	}
+
 }

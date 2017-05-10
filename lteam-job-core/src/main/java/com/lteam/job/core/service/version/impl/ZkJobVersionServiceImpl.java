@@ -1,10 +1,13 @@
 package com.lteam.job.core.service.version.impl;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.log4j.Logger;
 import org.apache.zookeeper.CreateMode;
-import org.jboss.netty.util.internal.StringUtil;
 import org.springframework.util.StringUtils;
 
 import com.lteam.job.common.config.Node;
@@ -26,6 +29,8 @@ import com.lteam.job.core.service.version.IJobVersionService;
  */
 public class ZkJobVersionServiceImpl implements IJobVersionService {
 
+	private static final Logger logger =  Logger.getLogger(ZkJobVersionServiceImpl.class);
+	
 	private VersionNode versionNode;
 	
 	private static CuratorFramework cilent = null ; 
@@ -39,6 +44,11 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 		zkApi.setCientObject(cilent);
 	}
 	
+	public IJobVersionService addVersionInfo(VersionNode versionNode) {
+		this.versionNode = versionNode;
+	    return this;
+	}
+
 	public List<VersionConfig> getJobVersionList() {
 		List<VersionConfig> result = null;
 		try {
@@ -48,7 +58,7 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
             	result.add(GsonUtil.gsonToBean(node.getNodeContent(), VersionConfig.class));
             }
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("lteam-job >> getJobVersionList exception error="+e);
 		}
 		return result;
 	}
@@ -59,11 +69,9 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 			if(StringUtils.isEmpty(version)){
 				return null;
 			}
-			//设置查询版本号
-			versionNode.getVersionConfig().setVersion(version);
-			data = zkApi.getNodeData(NodePath.getHistoryVersionPath(versionNode.getVersionConfig()));
+			data = zkApi.getNodeData(versionNode.getNodePath()+"/"+version);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("lteam-job >> getJobVersion exception param="+version+"   error="+e);
 		}
 		return GsonUtil.gsonToBean(data, VersionConfig.class);
 	}
@@ -77,43 +85,51 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 		try {
 			version = zkApi.getNodeData(versionNode.getNodePath());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("lteam-job >> getCurrentVersion exception error="+e);
 		}
-		return getJobVersion(version );
+		return getJobVersion(version);
 	}
 
-	public VersionConfig getBestOldVersion() {
-		
-		return null;
-	}
-	
 	public void handleVersionInfo() {
 		try {
 			String configPath = NodePath.getConfigPath(versionNode.getVersionConfig().getJobConfig());
 			zkApi.addNodeListener(configPath, true, new VersionIterationListener());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("lteam-job >> handleVersionInfo exception error="+e);
 		}
-	}
-
-	public IJobVersionService addVersionInfo(VersionNode versionNode) {
-		this.versionNode = versionNode;
-	    return this;
-	}
-
-	public void destoryBestOldVersionInfo(){
-		VersionConfig versionConfig = getBestOldVersion();
-		destoryVersionInfo(versionConfig.getVersion());
 	}
 	
 	public void destoryVersionInfo(String version) {
-
+		try {
+			VersionConfig currentVersion = getCurrentVersion();
+			if(!currentVersion.getVersion().equals(version)){
+				zkApi.deleteNodeIncludeLeafNode(versionNode.getNodePath()+"/"+version);
+			}
+		} catch (Exception e) {
+			logger.error("lteam-job >> destoryVersionInfo exception param="+version+"  error="+e);
+		}
 	}
 
-	
+	public VersionConfig getBestOldVersion() {
+		List<VersionConfig> versionList = getJobVersionList();
+		Collections.sort(versionList, new Comparator<VersionConfig>() {
 
+			@Override
+			public int compare(VersionConfig o1, VersionConfig o2) {
+				if(o1.getUpdataDate().compareTo(o2.getUpdataDate())>0){
+					return 1;
+				}
+				return 0;
+			}
+		});
+		
+		return null;
+	}
 	
-
+	public void destoryBestOldVersionInfo(){
+		destoryVersionInfo(getBestOldVersion().getVersion());
+	}
+	
 	public void storeVersionInfo() {
 		try {
 		    //处理最新版本内容
@@ -126,12 +142,10 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 				destoryBestOldVersionInfo();
 			}
 			//更新版本列表
+			versionNode.getVersionConfig().setCreateDate(new Date());
 			zkApi.createNode(new Node(versionNode.getVersionHistoryPath(), versionNode.getVersionHistoryContent()), CreateMode.PERSISTENT);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
-
-	
-
 }

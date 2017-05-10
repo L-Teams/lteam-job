@@ -7,9 +7,9 @@ package com.lteam.job.common.config;
  */
 public class Config {
 
-	private String rootPath = NodePath.ROOT;
+	public String rootPath = NodePath.ROOT;
 	
-    private String systemName;
+    public String systemName;
 	
     public String jobName;
 	

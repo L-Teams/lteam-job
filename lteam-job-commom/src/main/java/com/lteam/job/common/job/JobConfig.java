@@ -10,6 +10,17 @@ import com.lteam.job.common.config.Config;
  */
 public class JobConfig extends Config{
 	
+	@Override
+	public String toString() {
+		return "JobConfig [jobCron=" + jobCron + ", jobDescripte="
+				+ jobDescripte + ", jobMaster=" + jobMaster + ", masterEmail="
+				+ masterEmail + ", jobSliceNum=" + jobSliceNum
+				+ ", jobSliceStrategy=" + jobSliceStrategy
+				+ ", childrenJobName=" + childrenJobName + ", executeRule="
+				+ executeRule + ", jonStatus=" + jonStatus
+				+ ", maxVersionNumber=" + maxVersionNumber + "]";
+	}
+
 	private String jobCron;
 	
 	private String jobDescripte;

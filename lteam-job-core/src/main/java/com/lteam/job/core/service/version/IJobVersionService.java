@@ -47,7 +47,7 @@ public interface IJobVersionService {
 	public VersionConfig getBestOldVersion();
 	
 	/**
-	 * 功能:处理版本信息
+	 * 功能:处理版本信息-> 核心接口方法
 	 * 逻辑:1.判断是否已经订阅了config节点变更事件,如未订阅则订阅
 	 *     2.处理版本事件,发生变更则将新版本存入版本节点
 	 */
@@ -77,6 +77,8 @@ public interface IJobVersionService {
 	
 	/**
 	 * 功能:删除版本信息
+	 * 逻辑:1.判断是否为当前版本,如果为当前版本不可做删除
+	 *     2.如果不是当前版本则可做删除
 	 * @param version
 	 */
 	public void destoryVersionInfo(String version);
