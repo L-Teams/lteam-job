@@ -19,7 +19,7 @@ public class VersionNumFactory {
 	public static String creatVersionNum(){
 		  Random random = new Random();
 		  int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
-		  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm");
+		  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHssmm");
 		  return simpleDateFormat.format(new Date())+"-"+rannum;
 	}
 }

@@ -11,8 +11,10 @@ import org.apache.curator.framework.recipes.cache.NodeCacheListener;;
  */
 public abstract class AbstractZkNodeListener extends AbstractZkListener implements NodeCacheListener{
 
-	public NodeCache cache;
+	public NodeCache cache ;
 	
+    public Boolean isNowListener ;
+    
 	public abstract void nodeChanged() throws Exception;
 
 	public AbstractZkListener setCache(CuratorFramework cilent, String path) {
@@ -20,8 +22,9 @@ public abstract class AbstractZkNodeListener extends AbstractZkListener implemen
 		return this;
 	}
 
-	public AbstractZkListener setCache(CuratorFramework cilent, String path, boolean dataIsCompressed){
-		cache = new NodeCache(cilent, path, dataIsCompressed);
+	public AbstractZkListener setCache(CuratorFramework cilent, String path, boolean isNowListener){
+		this.isNowListener = isNowListener;
+		cache = new NodeCache(cilent, path, false);
 		return this;
 	}
 	
@@ -31,6 +34,10 @@ public abstract class AbstractZkNodeListener extends AbstractZkListener implemen
 	}
 
 	public void start() throws Exception{
+		if(isNowListener){
+		   cache.start(true);
+		   return ;
+		}
 		cache.start();
 	}
 	

@@ -99,7 +99,8 @@ public abstract class AbstractCuratorKeeperApi implements IZookeeperCilentApi{
 	public List<Node> getChildrenList(String path) throws Exception{
 		List<Node> list = new ArrayList<>();
 		for (String chPath : cilent.getChildren().forPath(path)) {
-			list.add(new Node(chPath, getNodeData(chPath)));
+			String childrenPath = path+"/"+chPath;
+			list.add(new Node(childrenPath, getNodeData(childrenPath)));
 		}
 		return list;
 	}
@@ -108,7 +109,7 @@ public abstract class AbstractCuratorKeeperApi implements IZookeeperCilentApi{
 		cilent = (CuratorFramework) t;
 	}	
 
-	public void addNodeListener(String path, boolean dataIsCompressed, AbstractZkListener listener) throws Exception {
-		listener.setCache(cilent, path, dataIsCompressed).addListener().start();
+	public void addNodeListener(String path, boolean isNowListener, AbstractZkListener listener) throws Exception {
+		listener.setCache(cilent, path, isNowListener).addListener().start();
 	}
 }

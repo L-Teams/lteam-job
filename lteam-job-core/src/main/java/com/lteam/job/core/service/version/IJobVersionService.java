@@ -1,9 +1,6 @@
 package com.lteam.job.core.service.version;
 import java.util.List;
-
-import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.version.VersionConfig;
-import com.lteam.job.common.version.VersionStatus;
 import com.lteam.job.core.config.version.VersionNode;
 /**
  * @Description:版本信息管理接口
