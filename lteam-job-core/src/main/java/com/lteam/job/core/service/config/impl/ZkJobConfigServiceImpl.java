@@ -1,7 +1,9 @@
 package com.lteam.job.core.service.config.impl;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.stereotype.Service;
+
 import com.lteam.job.common.config.NodePath;
+import com.lteam.job.common.context.Context;
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
@@ -62,11 +64,11 @@ public class ZkJobConfigServiceImpl implements IJobConfigService{
 		try {
 			JobStatus status = jobMasterService.addMasterConfigInfo(configNode.getJobInfo())
 			              					   .getJobExecuteStatus();
-			if(status == JobStatus.RUN){
-				zkApi.addNodeListener(NodePath.getJobExecuteStatus(configNode.getJobInfo()), true, new DestoryJobListener());
+			if(status != JobStatus.RUN){
+				zkApi.deleteNodeIncludeLeafNode(NodePath.getJobPath(configNode.getJobInfo()));
 				return ;
 			}
-			zkApi.deleteNodeIncludeLeafNode(NodePath.getJobPath(configNode.getJobInfo()));
+			zkApi.addNodeListener(NodePath.getJobExecuteStatus(configNode.getJobInfo()), true, new DestoryJobListener().setContext(new Context<JobConfig>(JobConfig.class , configNode.getJobInfo())));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
