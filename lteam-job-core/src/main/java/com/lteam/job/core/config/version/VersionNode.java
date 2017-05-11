@@ -1,4 +1,6 @@
 package com.lteam.job.core.config.version;
+import java.util.List;
+
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.config.NodeType;
@@ -50,9 +52,70 @@ public class VersionNode extends Node{
 		                 .handleVersionInfo();
 	}
 	
-
+    /**
+     * 功能:获取版本数量
+     * 逻辑:
+     * @return
+     */
+	public int getJobVersionNum(){
+		return jobVersionService.addVersionInfo(this).getJobVersionNum();
+	}
 	
+	/**
+	 * 功能:获取某一版本的配置信息
+	 * 逻辑:
+	 * @param version
+	 * @return
+	 */
+	public VersionConfig getJobVersion(String version){
+		return jobVersionService.addVersionInfo(this).getJobVersion(version);
+	}
 	
+	/**
+	 * 功能:获取版本列表
+	 * 逻辑:
+	 * @return
+	 */
+	public List<VersionConfig> getJobVersionList(){
+		return jobVersionService.addVersionInfo(this).getJobVersionList();
+	}
+	
+	/**
+	 * 功能:获取当前版本
+	 * 逻辑:
+	 * @return
+	 */
+	public VersionConfig getCurrentVersion(){
+		return jobVersionService.addVersionInfo(this).getCurrentVersion();
+	}
+	
+	/**
+	 * 功能:设置某一版本的当前版本
+	 * 逻辑:
+	 * @param version
+	 */
+	public void setCurrentVersion(String version){
+		
+	}
+	
+	/**
+	 * 功能:更新某一版本
+	 * 逻辑:
+	 * @param config
+	 */
+	public void updataVersion(VersionConfig config){
+		
+	}
+	
+	/**
+	 * 功能:删除某一版本信息
+	 * 逻辑:
+	 */
+	public void destoryVersionInfo(String version){
+		 jobVersionService.addVersionInfo(this).destoryVersionInfo(version);
+	}
+	
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>set get method>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	public String getVersionHistoryPath() {
 		return versionHistoryPath;
 	}

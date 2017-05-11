@@ -1,4 +1,7 @@
 package com.lteam.job.core.listener;
+import com.lteam.job.common.job.JobConfig;
+import com.lteam.job.common.job.JobStatus;
+import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.common.zkServer.listener.AbstractZkNodeListener;
 
 /**
@@ -11,7 +14,10 @@ public class DestoryJobListener extends AbstractZkNodeListener{
 
 	
     public void nodeChanged() throws Exception {
-		
-	}
+    	JobStatus jobStatus = GsonUtil.gsonToBean(new String(super.cache.getCurrentData().getData()), JobStatus.class);
+	    if(jobStatus != JobStatus.RUN){
+	    	
+	    }
+    }
 	
 }

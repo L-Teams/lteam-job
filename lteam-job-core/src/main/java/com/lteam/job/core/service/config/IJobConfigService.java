@@ -10,6 +10,7 @@ public interface IJobConfigService {
 
 	/**
 	 * 功能:添加配置信息
+	 * 逻辑:通过config 信息构建config 节点,service操作基于节点
 	 * @param config
 	 */
 	public IJobConfigService addJobConfigInfo(JobConfig config);

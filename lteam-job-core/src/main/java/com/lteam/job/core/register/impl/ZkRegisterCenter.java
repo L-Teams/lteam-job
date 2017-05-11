@@ -2,7 +2,6 @@ package com.lteam.job.core.register.impl;
 import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.lteam.job.common.job.JobConfig;
 import com.lteam.job.common.server.ServerConfig;
 import com.lteam.job.common.zkServer.factory.CuratorFactory;

@@ -147,12 +147,10 @@ public class ZkJobVersionServiceImpl implements IJobVersionService {
 			if(!zkApi.isExistPath(versionNode.getNodePath())){
 				zkApi.createNode(versionNode);
 			}
-			//处理版本内容变更,未变更则不做处理
-			List<VersionConfig> historyVersion = getJobVersionList();
-			for (VersionConfig config : historyVersion) {
-				if(versionNode.getVersionConfig().getJobConfig() != null && GsonUtil.gsonString(versionNode.getVersionConfig().getJobConfig()).equals(GsonUtil.gsonString(config.getJobConfig()))){
-					return ;
-				}
+			//处理版本内容与当前版本变更,未变更则不做处理
+			VersionConfig currentVersion = getCurrentVersion();
+			if(versionNode.getVersionConfig().getJobConfig() != null && GsonUtil.gsonString(versionNode.getVersionConfig().getJobConfig()).equals(GsonUtil.gsonString(currentVersion.getJobConfig()))){
+				return ;
 			}
 			zkApi.updataNodeData(versionNode);
 			//处理版本列表容量
