@@ -81,11 +81,11 @@ public class NodePath {
 	}
 	
 	public static String getFailServerPath(ServerConfig config){
-		return String.format(HOSTSUCCESSSERVERNODEPATH,config.getSystemName(), config.getJobName(), config.getHostName());
+		return String.format(HOSTFAILSERVERNODEPATH,config.getSystemName(), config.getJobName(), config.getHostName());
 	}
 	
 	public static String getSuccessServerPath(ServerConfig config){
-		return String.format(HOSTFAILSERVERNODEPATH,config.getSystemName(), config.getJobName(), config.getHostName());
+		return String.format(HOSTSUCCESSSERVERNODEPATH,config.getSystemName(), config.getJobName(), config.getHostName());
 	}
 	
 	public static String getMasterNodePath(Config config){

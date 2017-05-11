@@ -1,6 +1,8 @@
 package com.lteam.job.core.service.server.impl;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.log4j.Logger;
 import org.apache.zookeeper.CreateMode;
+
 import com.lteam.job.common.config.Node;
 import com.lteam.job.common.server.ServerConfig;
 import com.lteam.job.common.server.ServerStatus;
@@ -10,6 +12,7 @@ import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
 import com.lteam.job.core.config.server.ServersNode;
 import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.server.IJobServerService;
+import com.lteam.job.core.service.version.impl.ZkJobVersionServiceImpl;
 
 /**
  * @Description:服务器服务类
@@ -19,6 +22,8 @@ import com.lteam.job.core.service.server.IJobServerService;
  */
 public class ZkJobServerServiceImpl implements IJobServerService{
 
+	private static final Logger logger =  Logger.getLogger(ZkJobVersionServiceImpl.class);
+	
 	private ServersNode serversNode ;
 	
     private static CuratorFramework cilent = null ; 
@@ -48,7 +53,7 @@ public class ZkJobServerServiceImpl implements IJobServerService{
 			//处理服务器执行结果
 			handleServerResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("handleServerInfo exception error");
 		}
 	}
 
@@ -62,14 +67,14 @@ public class ZkJobServerServiceImpl implements IJobServerService{
 	public void handleServerResult(){
 		try {
 			if(!zkApi.isExistPath(serversNode.getHostServerFailCoutPath())){
-				zkApi.createNode(serversNode.getHostServerFailCoutPath(), serversNode.getHostServerFailCoutDate(), CreateMode.PERSISTENT);
+				zkApi.createNode(serversNode.getHostServerFailCoutPath(), serversNode.getHostServerFailCoutDate(), CreateMode.EPHEMERAL);
 			}
 			if(!zkApi.isExistPath(serversNode.getHostServerSuccessCoutPath())){
-				zkApi.createNode(serversNode.getHostServerSuccessCoutPath(), serversNode.getHostServerSuccessCoutDate(), CreateMode.PERSISTENT);
+				zkApi.createNode(serversNode.getHostServerSuccessCoutPath(), serversNode.getHostServerSuccessCoutDate(), CreateMode.EPHEMERAL);
 			}
 			//TODO注册master任务结果监听,更新服务器执行结果
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("handleServerResult exception error");
 		}
 	}
 	
@@ -97,6 +102,9 @@ public class ZkJobServerServiceImpl implements IJobServerService{
 		command.execute();
 	}
 	
+	public void storeServerInfo(){
+		
+	}
 	
     //状态服务内部类
 	class ServerStatusCommand{
@@ -131,7 +139,7 @@ public class ZkJobServerServiceImpl implements IJobServerService{
 		
 		private void updateAction() throws Exception{
 		    if(!zkApi.isExistPath(serversNode.getHostServerPath())){
-				zkApi.createNode(node);
+				zkApi.createNode(node,CreateMode.EPHEMERAL);
 			}else{
 				if(!zkApi.versionComparison(node)){
 					zkApi.updataNodeData(node);

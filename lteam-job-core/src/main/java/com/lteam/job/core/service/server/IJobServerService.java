@@ -12,7 +12,7 @@ public interface IJobServerService {
 
 	/**
 	 * 功能:添加服务器信息
-	 * 逻辑:
+	 * 逻辑:通过config生成节点,注:service基于节点操作
 	 * @param config
 	 * @return
 	 */
@@ -60,4 +60,9 @@ public interface IJobServerService {
 	 */
 	public void readyServerInfo();
 	
+	/**
+	 * 功能:存储服务器信息
+	 * 逻辑:
+	 */
+	public void storeServerInfo();
 }

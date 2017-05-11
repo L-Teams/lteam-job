@@ -1,7 +1,9 @@
 package com.lteam.job.core.service.master.impl;
-
 import org.apache.curator.framework.CuratorFramework;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.curator.framework.recipes.leader.LeaderLatch;
+import org.apache.curator.framework.recipes.leader.LeaderSelector;
+import org.apache.curator.framework.recipes.leader.LeaderSelectorListener;
+import org.apache.curator.framework.state.ConnectionState;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -9,7 +11,6 @@ import com.lteam.job.common.config.Config;
 import com.lteam.job.common.config.NodePath;
 import com.lteam.job.common.execute.ExecuteResult;
 import com.lteam.job.common.job.JobStatus;
-import com.lteam.job.common.master.MasterConfig;
 import com.lteam.job.common.util.GsonUtil;
 import com.lteam.job.common.zkServer.IZookeeperCilentApi;
 import com.lteam.job.common.zkServer.impl.CuratorKeeperApiImpl;
@@ -18,7 +19,7 @@ import com.lteam.job.core.register.impl.ZkRegisterCenter;
 import com.lteam.job.core.service.master.IJobMasterService;
 
 /**
- * @Description:
+ * @Description:主节点服务类
  * @author guicheng.huang
  * @date: 2017年4月26日 下午5:16:40
  * @version V0.0.1
@@ -37,6 +38,31 @@ public class ZkJobMasterServiceImpl implements IJobMasterService{
 			cilent = ZkRegisterCenter.getCilent();
 		}
 		zkApi.setCientObject(cilent);
+	}
+	
+	public IJobMasterService addMasterConfigInfo(Config config) {
+		masterNode = new MasterNode(config);
+		return this;
+	}
+	
+	public MasterNode masterServer() {
+        LeaderSelector selector = new LeaderSelector(cilent, masterNode.getNodePath(), new LeaderSelectorListener() {
+			
+			@Override
+			public void stateChanged(CuratorFramework client, ConnectionState newState) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void takeLeadership(CuratorFramework client) throws Exception {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        selector.autoRequeue();
+        selector.start();
+		return null;
 	}
 	
 	public String getMasterServiceInfo() {
@@ -61,13 +87,8 @@ public class ZkJobMasterServiceImpl implements IJobMasterService{
 		return jobStatus;
 	}
 
-	public MasterNode masterServer() {
-		return null;
-	}
+	
 
-	public IJobMasterService addMasterConfigInfo(Config config) {
-		masterNode = new MasterNode(config);
-		return this;
-	}
+	
 
 }
