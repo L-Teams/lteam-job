@@ -46,23 +46,7 @@ public class ZkJobMasterServiceImpl implements IJobMasterService{
 	}
 	
 	public MasterNode masterServer() {
-        LeaderSelector selector = new LeaderSelector(cilent, masterNode.getNodePath(), new LeaderSelectorListener() {
-			
-			@Override
-			public void stateChanged(CuratorFramework client, ConnectionState newState) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void takeLeadership(CuratorFramework client) throws Exception {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-        selector.autoRequeue();
-        selector.start();
-		return null;
+       return null;
 	}
 	
 	public String getMasterServiceInfo() {

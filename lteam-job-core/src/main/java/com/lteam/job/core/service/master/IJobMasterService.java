@@ -1,7 +1,6 @@
 package com.lteam.job.core.service.master;
 import com.lteam.job.common.config.Config;
 import com.lteam.job.common.execute.ExecuteResult;
-import com.lteam.job.common.job.JobStatus;
 import com.lteam.job.core.config.master.MasterNode;
 
 /**
